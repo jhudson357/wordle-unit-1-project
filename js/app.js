@@ -42,14 +42,22 @@ function playerGuess(evt) {
         console.log(guess, 'guess array')
         letter = ''
       }
+      // if(guess.length === 5) {
+      //   checkGuess()
+      //   numGuesses++
+      //   guess = []
+      // }
+    } else if (evt.target.id === 'BACK') {
+      guess.pop(letter)
+      console.log(guess)
+    } else {
       if(guess.length === 5) {
         checkGuess()
         numGuesses++
         guess = []
+      } else {
+        console.log("Not enough letters")
       }
-    } else if (evt.target.id === 'BACK') {
-      guess.pop(letter)
-      console.log(guess)
     }
   }
 }
