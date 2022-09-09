@@ -7,7 +7,7 @@ const keys = [
 
 
 /*-------------------------------- Variables --------------------------------*/
-let randomWord, row, numGuess, winner, letter
+let randomWord, row, numGuesses, winner, letter
 let guess = []
 let secretWord = 'mango'
 
@@ -25,6 +25,12 @@ keyboardEl.addEventListener('click', playerGuess)
 
 /*-------------------------------- Functions --------------------------------*/
 
+// startGame()
+
+// function startGame() {
+
+// }
+
 function playerGuess(evt) {
   if(evt.target.id !== 'keyboard-container' && evt.target.id !== 'first-row' && evt.target.id !== 'second-row' && evt.target.id !== 'third-row') {
       letter = evt.target.id
@@ -39,6 +45,7 @@ function storeFullGuess() {
   console.log(guess, 'guess array')
   if(guess.length === 5) {
     checkGuess()
+    numGuesses++
     guess = []
   }
 }
@@ -47,10 +54,14 @@ function checkGuess() {
   let secretWordArray = secretWord.toUpperCase().split('')
   console.log(secretWordArray, 'secret word array')
   for(let i=0; i<5; i++) {
-    if(guess[i] === secretWordArray[i]) {
-      console.log(`${guess[i]} is a match`)
+    if(secretWordArray.includes(guess[i])) {
+      if(guess[i] === secretWordArray[i]) {
+        console.log(`${guess[i]} is a match!`)
+      } else {
+        console.log(`${guess[i]} is in the secret word, but in a dif location`)
+      }
     } else {
-      console.log(`${guess[i]} is not a match`)
+      console.log(`${guess[i]} is not in the secret word`)
     }
   }
 }
