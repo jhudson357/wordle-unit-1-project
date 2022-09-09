@@ -17,7 +17,9 @@ console.log(keyboardEl)
 console.log(boardEl)
 
 /*----------------------------- Event Listeners -----------------------------*/
-//keyboardEl.addEventListener('')
+keyboardEl.addEventListener('click', () => {
+  console.log('you clicked on the keyboard')
+})
 
 
 /*-------------------------------- Functions --------------------------------*/
