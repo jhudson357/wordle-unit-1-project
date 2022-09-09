@@ -9,6 +9,7 @@ const keys = [
 /*-------------------------------- Variables --------------------------------*/
 let randomWord, row, numGuess, winner, letter
 let guess = []
+let secretWord = 'mango'
 
 
 /*------------------------ Cached Element References ------------------------*/
@@ -35,5 +36,21 @@ function playerGuess(evt) {
 
 function storeFullGuess() {
   if(guess.length <5) {guess.push(letter)}
-  console.log(guess)
+  console.log(guess, 'guess array')
+  if(guess.length === 5) {
+    checkGuess()
+    guess = []
+  }
+}
+
+function checkGuess() {
+  let secretWordArray = secretWord.toUpperCase().split('')
+  console.log(secretWordArray, 'secret word array')
+  for(let i=0; i<5; i++) {
+    if(guess[i] === secretWordArray[i]) {
+      console.log(`${guess[i]} is a match`)
+    } else {
+      console.log(`${guess[i]} is not a match`)
+    }
+  }
 }
