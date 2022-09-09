@@ -5,6 +5,15 @@ const keys = [
   'ENTER', 'Z', 'X', 'C', 'V', 'B', 'N', 'M', 'BACK'
 ]
 
+const board = [
+  ['a', 'b', 'c', 'd', 'e'],
+  ['', '', '', '', ''],
+  ['', '', '', '', ''],
+  ['', '', '', '', ''],
+  ['', '', '', '', ''],
+  ['', '', '', '', '']
+]
+
 
 /*-------------------------------- Variables --------------------------------*/
 let randomWord, row, numGuesses, winner, letter
@@ -15,21 +24,33 @@ let secretWord = 'mango'
 /*------------------------ Cached Element References ------------------------*/
 const boardEl = document.querySelector('#board-container')
 const keyboardEl = document.querySelector('#keyboard-container')
+const messageEl = document.querySelector('#message')
+
 
 /*----------------------------- Event Listeners -----------------------------*/
 keyboardEl.addEventListener('click', playerGuess)
-// keyboardEl.addEventListener('click', () => {
-//   console.log('you clicked on the keyboard')
-// })
+
 
 
 /*-------------------------------- Functions --------------------------------*/
 
-// startGame()
+startGame()
 
-// function startGame() {
+function startGame() {
+  numGuesses = 0
+  createBoard()
+}
 
-// }
+function createBoard() {
+  for(let array of board) {
+    for(let i of array) {
+      let square = document.createElement('div')
+      square.textContent = i
+      square.id = 'board-square'
+      boardEl.appendChild(square)
+    }
+  }
+}
 
 function playerGuess(evt) {
   if(evt.target.id !== 'keyboard-container' && evt.target.id !== 'first-row' && evt.target.id !== 'second-row' && evt.target.id !== 'third-row') {
