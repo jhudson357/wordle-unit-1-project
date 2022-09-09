@@ -33,22 +33,36 @@ keyboardEl.addEventListener('click', playerGuess)
 
 function playerGuess(evt) {
   if(evt.target.id !== 'keyboard-container' && evt.target.id !== 'first-row' && evt.target.id !== 'second-row' && evt.target.id !== 'third-row') {
+    if(evt.target.id !== 'ENTER' && evt.target.id !== 'BACK') {
       letter = evt.target.id
       console.log(letter, 'LETTER CLICKED')
-      storeFullGuess()
+      //storeFullGuess()
+      if(guess.length <5) {
+        guess.push(letter)
+        console.log(guess, 'guess array')
+        letter = ''
+      }
+      if(guess.length === 5) {
+        checkGuess()
+        numGuesses++
+        guess = []
+      }
+    } else if (evt.target.id === 'BACK') {
+      guess.pop(letter)
+      console.log(guess)
     }
-    letter = ''
-}
-
-function storeFullGuess() {
-  if(guess.length <5) {guess.push(letter)}
-  console.log(guess, 'guess array')
-  if(guess.length === 5) {
-    checkGuess()
-    numGuesses++
-    guess = []
   }
 }
+
+// function storeFullGuess() {
+//   if(guess.length <5) {guess.push(letter)}
+//   console.log(guess, 'guess array')
+//   if(guess.length === 5) {
+//     checkGuess()
+//     numGuesses++
+//     guess = []
+//   }
+// }
 
 function checkGuess() {
   let secretWordArray = secretWord.toUpperCase().split('')
