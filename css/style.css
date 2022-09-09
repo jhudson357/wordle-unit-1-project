@@ -10,3 +10,26 @@ body {
   min-height: 100vh;
 }
 
+#keyboard-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 15px;
+}
+
+#first-row,
+#second-row,
+#third-row {
+  display: flex;
+}
+
+#first-row > div,
+#second-row > div,
+#third-row > div {
+  border: 1px solid black;
+  border-radius: 3px;
+  margin: 2px;
+  padding: 3px;
+
+}
