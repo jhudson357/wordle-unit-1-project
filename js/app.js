@@ -7,19 +7,33 @@ const keys = [
 
 
 /*-------------------------------- Variables --------------------------------*/
-let randomWord, row, guesses, winner
+let randomWord, row, numGuess, winner, letter
+let guess = []
 
 
 /*------------------------ Cached Element References ------------------------*/
 const boardEl = document.querySelector('#board-container')
 const keyboardEl = document.querySelector('#keyboard-container')
-console.log(keyboardEl)
-console.log(boardEl)
 
 /*----------------------------- Event Listeners -----------------------------*/
-keyboardEl.addEventListener('click', () => {
-  console.log('you clicked on the keyboard')
-})
+keyboardEl.addEventListener('click', playerGuess)
+// keyboardEl.addEventListener('click', () => {
+//   console.log('you clicked on the keyboard')
+// })
 
 
 /*-------------------------------- Functions --------------------------------*/
+
+function playerGuess(evt) {
+  if(evt.target.id !== 'keyboard-container' && evt.target.id !== 'first-row' && evt.target.id !== 'second-row' && evt.target.id !== 'third-row') {
+      letter = evt.target.id
+      console.log(letter, 'LETTER CLICKED')
+      storeFullGuess()
+    }
+    letter = ''
+}
+
+function storeFullGuess() {
+  if(guess.length <5) {guess.push(letter)}
+  console.log(guess)
+}
