@@ -21,11 +21,12 @@ let guess = []
 let secretWord = 'mango'
 
 
+
 /*------------------------ Cached Element References ------------------------*/
 const boardEl = document.querySelector('#board-container')
 const keyboardEl = document.querySelector('#keyboard-container')
 const messageEl = document.querySelector('#message')
-//const resetBtn = document.querySelector('#reset-btn')
+const resetBtnEl = document.querySelector('#reset-btn')
 
 
 
@@ -41,6 +42,8 @@ startGame()
 
 function startGame() {
   numGuesses = -1
+  resetBtnEl.style.display = 'none'
+  keyboardEl.style.display = ''
   createBoard()
 }
 
@@ -63,7 +66,6 @@ function renderGuess() {
     squareEl[numGuesses].textContent = letter
   }
 }
-
 
 
 function playerGuess(evt) {
@@ -112,5 +114,14 @@ function checkGuess() {
     } else {
       console.log(`${guess[i]} is not in the secret word`)
     }
+  }
+  isWinner()
+}
+
+function isWinner() {
+  console.log(guess.join(''))
+  console.log(secretWord)
+  if(guess.join('') === secretWord.toUpperCase()) {
+    messageEl.textContent = 'Congrats, you win!'
   }
 }
