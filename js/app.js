@@ -83,13 +83,15 @@ function playerGuess(evt) {
         letter = ''
       }
     } else if (evt.target.id === 'BACK') {
-      console.log('pop')
-      guess.pop(letter)
-      console.log(guess, 'guesss')
-      console.log(numGuesses, 'numGuessess')
-      renderGuess()
-      numGuesses -= 1
-      console.log(guess)
+      if(guess.length !== 0) {
+        console.log('pop')
+        guess.pop(letter)
+        console.log(guess, 'guesss')
+        console.log(numGuesses, 'numGuessess')
+        renderGuess()
+        numGuesses -= 1
+        console.log(guess)
+      }
     } else {
       if(guess.length === 5) {
         checkGuess()
@@ -135,6 +137,5 @@ function isWinner() {
 
 
 //!TO DO:
-// stop user from being able to click back button after entering
 // update colors for squares 
 // add timer to message
