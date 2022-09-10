@@ -58,11 +58,13 @@ function createBoard() {
 const squareEl = document.querySelectorAll('#board-square')
 console.log(squareEl)
 
-function render() {
+function renderGuess() {
   if (guess.length < 5) {
     squareEl[numGuesses].textContent = letter
   }
 }
+
+
 
 function playerGuess(evt) {
   if(evt.target.id !== 'keyboard-container' && evt.target.id !== 'first-row' && evt.target.id !== 'second-row' && evt.target.id !== 'third-row') {
@@ -72,7 +74,7 @@ function playerGuess(evt) {
       if(guess.length <5) {
         numGuesses += 1
         console.log(numGuesses, 'numGuesses')
-        render()
+        renderGuess()
         guess.push(letter)
         console.log(guess, 'guess array')
         letter = ''
@@ -82,7 +84,7 @@ function playerGuess(evt) {
       guess.pop(letter)
       console.log(guess, 'guesss')
       console.log(numGuesses, 'numGuessess')
-      render()
+      renderGuess()
       numGuesses -= 1
       console.log(guess)
     } else {
@@ -90,6 +92,7 @@ function playerGuess(evt) {
         checkGuess()
         guess = []
       } else {
+        messageEl.textContent = 'Not enough letters'
         console.log("Not enough letters")
       }
     }
