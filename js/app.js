@@ -1,12 +1,12 @@
 /*-------------------------------- Constants --------------------------------*/
-const keys = [
-  'Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P',
-  'A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L',
-  'ENTER', 'Z', 'X', 'C', 'V', 'B', 'N', 'M', 'BACK'
-]
+// const keys = [
+//   'Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P',
+//   'A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L',
+//   'ENTER', 'Z', 'X', 'C', 'V', 'B', 'N', 'M', 'BACK'
+// ]
 
 const board = [
-  ['a', 'b', 'c', 'd', 'e'],
+  ['', '', '', '', ''],
   ['', '', '', '', ''],
   ['', '', '', '', ''],
   ['', '', '', '', ''],
@@ -25,10 +25,13 @@ let secretWord = 'mango'
 const boardEl = document.querySelector('#board-container')
 const keyboardEl = document.querySelector('#keyboard-container')
 const messageEl = document.querySelector('#message')
+//const resetBtn = document.querySelector('#reset-btn')
+
 
 
 /*----------------------------- Event Listeners -----------------------------*/
 keyboardEl.addEventListener('click', playerGuess)
+//resetBtn.addEventListener('click', startGame)
 
 
 
@@ -37,7 +40,7 @@ keyboardEl.addEventListener('click', playerGuess)
 startGame()
 
 function startGame() {
-  numGuesses = 0
+  numGuesses = -1
   createBoard()
 }
 
@@ -52,29 +55,39 @@ function createBoard() {
   }
 }
 
+const squareEl = document.querySelectorAll('#board-square')
+console.log(squareEl)
+
+function render() {
+  if (guess.length < 5) {
+    squareEl[numGuesses].textContent = letter
+  }
+}
+
 function playerGuess(evt) {
   if(evt.target.id !== 'keyboard-container' && evt.target.id !== 'first-row' && evt.target.id !== 'second-row' && evt.target.id !== 'third-row') {
     if(evt.target.id !== 'ENTER' && evt.target.id !== 'BACK') {
       letter = evt.target.id
       console.log(letter, 'LETTER CLICKED')
-      //storeFullGuess()
       if(guess.length <5) {
+        numGuesses += 1
+        console.log(numGuesses, 'numGuesses')
+        render()
         guess.push(letter)
         console.log(guess, 'guess array')
         letter = ''
       }
-      // if(guess.length === 5) {
-      //   checkGuess()
-      //   numGuesses++
-      //   guess = []
-      // }
     } else if (evt.target.id === 'BACK') {
+      console.log('pop')
       guess.pop(letter)
+      console.log(guess, 'guesss')
+      console.log(numGuesses, 'numGuessess')
+      render()
+      numGuesses -= 1
       console.log(guess)
     } else {
       if(guess.length === 5) {
         checkGuess()
-        numGuesses++
         guess = []
       } else {
         console.log("Not enough letters")
@@ -82,16 +95,6 @@ function playerGuess(evt) {
     }
   }
 }
-
-// function storeFullGuess() {
-//   if(guess.length <5) {guess.push(letter)}
-//   console.log(guess, 'guess array')
-//   if(guess.length === 5) {
-//     checkGuess()
-//     numGuesses++
-//     guess = []
-//   }
-// }
 
 function checkGuess() {
   let secretWordArray = secretWord.toUpperCase().split('')
