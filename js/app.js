@@ -119,9 +119,13 @@ function checkGuess() {
 }
 
 function isWinner() {
-  console.log(guess.join(''))
-  console.log(secretWord)
   if(guess.join('') === secretWord.toUpperCase()) {
     messageEl.textContent = 'Congrats, you win!'
+    resetBtnEl.style.display = ''
+    keyboardEl.style.display = 'none'
+  } else if(numGuesses === 29) {
+    messageEl.textContent = `You lose. The word was ${secretWord}`
+    resetBtnEl.style.display = ''
+    keyboardEl.style.display = 'none'
   }
 }
