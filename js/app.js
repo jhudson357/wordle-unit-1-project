@@ -43,6 +43,7 @@ startGame()
 function startGame() {
   numGuesses = -1
   resetBtnEl.style.display = 'none'
+  messageEl.style.display = 'none'
   keyboardEl.style.display = ''
   createBoard()
 }
@@ -121,11 +122,19 @@ function checkGuess() {
 function isWinner() {
   if(guess.join('') === secretWord.toUpperCase()) {
     messageEl.textContent = 'Congrats, you win!'
+    messageEl.style.display = ''
     resetBtnEl.style.display = ''
     keyboardEl.style.display = 'none'
   } else if(numGuesses === 29) {
     messageEl.textContent = `You lose. The word was ${secretWord}`
+    messageEl.style.display = ''
     resetBtnEl.style.display = ''
     keyboardEl.style.display = 'none'
   }
 }
+
+
+//!TO DO:
+// stop user from being able to click back button after entering
+// update colors for squares 
+// add timer to message
