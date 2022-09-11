@@ -48,10 +48,10 @@ body {
 #first-row > div,
 #second-row > div,
 #third-row > div {
-  border: 1px solid black;
   border-radius: 3px;
   margin: 2px;
   padding: 3px;
+  background-color: rgb(212, 214, 218);
 }
 
 #reset-btn {
