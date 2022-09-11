@@ -89,7 +89,7 @@ function playerGuess(evt) {
       }
     } else {
       if(guess.length === 5) {
-        checkGuess()
+        checkGuess(evt)
         guess = []
       } else {
         messageEl.textContent = 'Not enough letters'
@@ -99,18 +99,21 @@ function playerGuess(evt) {
   }
 }
 
-function checkGuess() {
+function checkGuess(evt) {
   let secretWordArray = secretWord.toUpperCase().split('')
   console.log(secretWordArray, 'secret word array')
   for(let i=0; i<5; i++) {
     if(secretWordArray.includes(guess[i])) {
       if(guess[i] === secretWordArray[i]) {
         console.log(`${guess[i]} is a match!`)
+        squareEl[i].className = 'green'
       } else {
         console.log(`${guess[i]} is in the secret word, but in a dif location`)
+        squareEl[i].className = 'yellow'
       }
     } else {
       console.log(`${guess[i]} is not in the secret word`)
+      squareEl[i].className = 'gray'
     }
   }
   isWinner()

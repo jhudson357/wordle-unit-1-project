@@ -57,3 +57,18 @@ body {
 #reset-btn {
   margin: 15px 0 0 0;
 }
+
+.green {
+  background-color: rgb(95, 160, 89);
+  color: white;
+}
+
+.yellow {
+  background-color: rgb(194, 171, 78);
+  color: white;
+}
+
+.gray {
+  background-color: rgb(109, 113, 115);
+  color: white;
+}
