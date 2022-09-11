@@ -5,14 +5,14 @@
 //   'ENTER', 'Z', 'X', 'C', 'V', 'B', 'N', 'M', 'BACK'
 // ]
 
-const board = [
-  ['', '', '', '', ''],
-  ['', '', '', '', ''],
-  ['', '', '', '', ''],
-  ['', '', '', '', ''],
-  ['', '', '', '', ''],
-  ['', '', '', '', '']
-]
+// const board = [
+//   ['', '', '', '', ''],
+//   ['', '', '', '', ''],
+//   ['', '', '', '', ''],
+//   ['', '', '', '', ''],
+//   ['', '', '', '', ''],
+//   ['', '', '', '', '']
+// ]
 
 
 /*-------------------------------- Variables --------------------------------*/
@@ -27,6 +27,8 @@ const boardEl = document.querySelector('#board-container')
 const keyboardEl = document.querySelector('#keyboard-container')
 const messageEl = document.querySelector('#message')
 const resetBtnEl = document.querySelector('#reset-btn')
+const squareEl = document.querySelectorAll('#board-square')
+console.log(squareEl)
 
 
 
@@ -45,29 +47,20 @@ function startGame() {
   resetBtnEl.style.display = 'none'
   messageEl.style.display = 'none'
   keyboardEl.style.display = ''
-  createBoard()
+  clearBoard()
 }
 
-function createBoard() {
-  for(let array of board) {
-    for(let i of array) {
-      let square = document.createElement('div')
-      square.textContent = i
-      square.id = 'board-square'
-      boardEl.appendChild(square)
-    }
+function clearBoard() {
+  for(let i=0; i<squareEl.length; i++) {
+    squareEl[i].textContent = ''
   }
 }
-
-const squareEl = document.querySelectorAll('#board-square')
-console.log(squareEl)
 
 function renderGuess() {
   if (guess.length < 5) {
     squareEl[numGuesses].textContent = letter
   }
 }
-
 
 function playerGuess(evt) {
   if(evt.target.id !== 'keyboard-container' && evt.target.id !== 'first-row' && evt.target.id !== 'second-row' && evt.target.id !== 'third-row') {
