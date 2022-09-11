@@ -32,7 +32,7 @@ const resetBtnEl = document.querySelector('#reset-btn')
 
 /*----------------------------- Event Listeners -----------------------------*/
 keyboardEl.addEventListener('click', playerGuess)
-//resetBtn.addEventListener('click', startGame)
+resetBtnEl.addEventListener('click', startGame)
 
 
 
@@ -72,7 +72,9 @@ function renderGuess() {
 function playerGuess(evt) {
   if(evt.target.id !== 'keyboard-container' && evt.target.id !== 'first-row' && evt.target.id !== 'second-row' && evt.target.id !== 'third-row') {
     if(evt.target.id !== 'ENTER' && evt.target.id !== 'BACK') {
-      letter = evt.target.id
+      if(guess.length < 5) {
+        letter = evt.target.id
+      }
       console.log(letter, 'LETTER CLICKED')
       if(guess.length <5) {
         numGuesses += 1
