@@ -15,10 +15,12 @@
 // ]
 
 
+
 /*-------------------------------- Variables --------------------------------*/
 let randomWord, row, numGuesses, winner, letter
 let guess = []
 let secretWord = 'mango'
+let secretWordArray = secretWord.toUpperCase().split('')
 
 
 
@@ -33,7 +35,7 @@ console.log(squareEl)
 
 
 /*----------------------------- Event Listeners -----------------------------*/
-keyboardEl.addEventListener('click', playerGuess, checkGuess)
+keyboardEl.addEventListener('click', playerGuess)
 resetBtnEl.addEventListener('click', startGame)
 
 
@@ -90,7 +92,7 @@ function playerGuess(evt) {
       }
     } else {
       if(guess.length === 5) {
-        checkGuess(evt)
+        checkGuess()
         guess = []
       } else {
         messageEl.textContent = 'Not enough letters'
@@ -100,57 +102,72 @@ function playerGuess(evt) {
   }
 }
 
-function checkGuess(evt) {
-  let secretWordArray = secretWord.toUpperCase().split('')
-  console.log(secretWordArray, 'secret word array')
+function checkGuess() {
   for(let i=0; i<5; i++) {
     if(secretWordArray.includes(guess[i])) {
       if(guess[i] === secretWordArray[i]) {
         console.log(`${guess[i]} is a match!`)
         if(numGuesses === 4){
           squareEl[i].className = 'green'
+          document.getElementById(`${squareEl[i].textContent}`).className = 'green'
         } else if(numGuesses === 9) {
           squareEl[i+5].className = 'green'
+          document.getElementById(`${squareEl[i+5].textContent}`).className = 'green'
         } else if(numGuesses === 14) {
           squareEl[i+10].className = 'green'
+          document.getElementById(`${squareEl[i+10].textContent}`).className = 'green'
         } else if(numGuesses === 19) {
           squareEl[i+15].className = 'green'
+          document.getElementById(`${squareEl[i+15].textContent}`).className = 'green'
         } else if(numGuesses === 24) {
           squareEl[i+20].className = 'green'
+          document.getElementById(`${squareEl[i+20].textContent}`).className = 'green'
         } else if(numGuesses === 29) {
-          squareEl[i+25].className = 'green'  
+          squareEl[i+25].className = 'green'
+          document.getElementById(`${squareEl[i+25].textContent}`).className = 'green'  
         }    
-        // evt.target.className = 'green'
       } else {
         console.log(`${guess[i]} is in the secret word, but in a dif location`)
         if(numGuesses === 4){
           squareEl[i].className = 'yellow'
+          if(document.getElementById(`${squareEl[i].textContent}`).className !== 'green') {document.getElementById(`${squareEl[i].textContent}`).className = 'yellow'}
         } else if(numGuesses === 9) {
           squareEl[i+5].className = 'yellow'
+          if(document.getElementById(`${squareEl[i+5].textContent}`).className !== 'green') {document.getElementById(`${squareEl[i+5].textContent}`).className = 'yellow'}
         } else if(numGuesses === 14) {
           squareEl[i+10].className = 'yellow'
+          if(document.getElementById(`${squareEl[i+10].textContent}`).className !== 'green') {document.getElementById(`${squareEl[i+10].textContent}`).className = 'yellow'}
         } else if(numGuesses === 19) {
           squareEl[i+15].className = 'yellow'
+          if(document.getElementById(`${squareEl[i+15].textContent}`).className !== 'green') {document.getElementById(`${squareEl[i+15].textContent}`).className = 'yellow'}
         } else if(numGuesses === 24) {
           squareEl[i+20].className = 'yellow'
+          if(document.getElementById(`${squareEl[i+20].textContent}`).className !== 'green') {document.getElementById(`${squareEl[i+20].textContent}`).className = 'yellow'}
         } else if(numGuesses === 29) {
-          squareEl[i+25].className = 'yellow'  
+          squareEl[i+25].className = 'yellow'
+          if(document.getElementById(`${squareEl[i+25].textContent}`).className !== 'green') {document.getElementById(`${squareEl[i+25].textContent}`).className = 'yellow'}  
         }
       }
     } else {
       console.log(`${guess[i]} is not in the secret word`)
       if(numGuesses === 4){
         squareEl[i].className = 'gray'
+        document.getElementById(`${squareEl[i].textContent}`).className = 'gray'
       } else if(numGuesses === 9) {
         squareEl[i+5].className = 'gray'
+        document.getElementById(`${squareEl[i+5].textContent}`).className = 'gray'
       } else if(numGuesses === 14) {
         squareEl[i+10].className = 'gray'
+        document.getElementById(`${squareEl[i+10].textContent}`).className = 'gray'
       } else if(numGuesses === 19) {
         squareEl[i+15].className = 'gray'
+        document.getElementById(`${squareEl[i+15].textContent}`).className = 'gray'
       } else if(numGuesses === 24) {
         squareEl[i+20].className = 'gray'
+        document.getElementById(`${squareEl[i+20].textContent}`).className = 'gray'
       } else if(numGuesses === 29) {
-        squareEl[i+25].className = 'gray'  
+        squareEl[i+25].className = 'gray'
+        document.getElementById(`${squareEl[i+25].textContent}`).className = 'gray'  
       }
     }
   }
