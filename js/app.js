@@ -30,7 +30,11 @@ const keyboardEl = document.querySelector('#keyboard-container')
 const messageEl = document.querySelector('#message')
 const resetBtnEl = document.querySelector('#reset-btn')
 const squareEl = document.querySelectorAll('#board-square')
-console.log(squareEl)
+const firstRowKeys = document.querySelector('#first-row').children
+const secondRowKeys = document.querySelector('#second-row').children
+const thirdRowKeys = document.querySelector('#third-row').children
+
+console.log(firstRowKeys)
 
 
 
@@ -50,12 +54,23 @@ function startGame() {
   messageEl.style.display = 'none'
   keyboardEl.style.display = ''
   clearBoard()
+  clearKeyboard()
 }
 
 function clearBoard() {
   for(let i=0; i<squareEl.length; i++) {
     squareEl[i].textContent = ''
     squareEl[i].className = ''
+  }
+}
+
+function clearKeyboard() {
+  for(let i=0; i<firstRowKeys.length; i++) {
+    firstRowKeys[i].className = ''
+  }
+  for(let i=0; i<secondRowKeys.length; i++) {
+    secondRowKeys[i].className = ''
+    thirdRowKeys[i].className = ''
   }
 }
 
