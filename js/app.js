@@ -33,7 +33,7 @@ console.log(squareEl)
 
 
 /*----------------------------- Event Listeners -----------------------------*/
-keyboardEl.addEventListener('click', playerGuess)
+keyboardEl.addEventListener('click', playerGuess, checkGuess)
 resetBtnEl.addEventListener('click', startGame)
 
 
@@ -53,6 +53,7 @@ function startGame() {
 function clearBoard() {
   for(let i=0; i<squareEl.length; i++) {
     squareEl[i].textContent = ''
+    squareEl[i].className = ''
   }
 }
 
@@ -106,14 +107,51 @@ function checkGuess(evt) {
     if(secretWordArray.includes(guess[i])) {
       if(guess[i] === secretWordArray[i]) {
         console.log(`${guess[i]} is a match!`)
-        squareEl[i].className = 'green'
+        if(numGuesses === 4){
+          squareEl[i].className = 'green'
+        } else if(numGuesses === 9) {
+          squareEl[i+5].className = 'green'
+        } else if(numGuesses === 14) {
+          squareEl[i+10].className = 'green'
+        } else if(numGuesses === 19) {
+          squareEl[i+15].className = 'green'
+        } else if(numGuesses === 24) {
+          squareEl[i+20].className = 'green'
+        } else if(numGuesses === 29) {
+          squareEl[i+25].className = 'green'  
+        }    
+        // evt.target.className = 'green'
       } else {
         console.log(`${guess[i]} is in the secret word, but in a dif location`)
-        squareEl[i].className = 'yellow'
+        if(numGuesses === 4){
+          squareEl[i].className = 'yellow'
+        } else if(numGuesses === 9) {
+          squareEl[i+5].className = 'yellow'
+        } else if(numGuesses === 14) {
+          squareEl[i+10].className = 'yellow'
+        } else if(numGuesses === 19) {
+          squareEl[i+15].className = 'yellow'
+        } else if(numGuesses === 24) {
+          squareEl[i+20].className = 'yellow'
+        } else if(numGuesses === 29) {
+          squareEl[i+25].className = 'yellow'  
+        }
       }
     } else {
       console.log(`${guess[i]} is not in the secret word`)
-      squareEl[i].className = 'gray'
+      if(numGuesses === 4){
+        squareEl[i].className = 'gray'
+      } else if(numGuesses === 9) {
+        squareEl[i+5].className = 'gray'
+      } else if(numGuesses === 14) {
+        squareEl[i+10].className = 'gray'
+      } else if(numGuesses === 19) {
+        squareEl[i+15].className = 'gray'
+      } else if(numGuesses === 24) {
+        squareEl[i+20].className = 'gray'
+      } else if(numGuesses === 29) {
+        squareEl[i+25].className = 'gray'  
+      }
     }
   }
   isWinner()
