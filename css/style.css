@@ -23,10 +23,12 @@ body {
 }
 
 #board-square {
-  border: 1px solid rgb(211, 214, 218);
-  width: 30px;
-  height: 30px;
-  margin: 2px;
+  border: 2px solid rgb(211, 214, 218);
+  width: 62px;
+  height: 62px;
+  font-size: 2rem;
+  font-weight: bold;
+  margin: 2.5px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -50,10 +52,22 @@ body {
 #second-row > div,
 #third-row > div {
   border: 1px solid black;
-  border-radius: 3px;
+  border-radius: 4px;
   margin: 2px;
   padding: 3px;
+  width: 43px;
+  height: 58px;
+  font-size: 13.3333px;
+  font-weight: 700;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   /* background-color: rgb(212, 214, 218); */
+}
+
+#enter, 
+#back {
+  width: 65px;
 }
 
 #reset-btn {

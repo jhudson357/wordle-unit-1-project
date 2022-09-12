@@ -69,7 +69,7 @@ function renderGuess() {
 
 function playerGuess(evt) {
   if(evt.target.id !== 'keyboard-container' && evt.target.id !== 'first-row' && evt.target.id !== 'second-row' && evt.target.id !== 'third-row') {
-    if(evt.target.id !== 'ENTER' && evt.target.id !== 'BACK') {
+    if(evt.target.id !== 'enter' && evt.target.id !== 'back') {
       if(guess.length < 5) {
         letter = evt.target.id
       }
@@ -82,7 +82,7 @@ function playerGuess(evt) {
         console.log(guess, 'guess array')
         letter = ''
       }
-    } else if (evt.target.id === 'BACK') {
+    } else if (evt.target.id === 'back') {
       if(guess.length !== 0) {
         console.log('pop')
         guess.pop(letter)
