@@ -1,11 +1,11 @@
+import { getSecretWord } from "../data/words.js";
+
 /*-------------------------------- Constants --------------------------------*/
 
 /*-------------------------------- Variables --------------------------------*/
 let randomWord, row, numGuesses, winner, letter
 let guess = []
-let secretWord = 'mango'
-let secretWordArray = secretWord.toUpperCase().split('')
-
+let secretWord
 
 
 /*------------------------ Cached Element References ------------------------*/
@@ -18,14 +18,10 @@ const firstRowKeys = document.querySelector('#first-row').children
 const secondRowKeys = document.querySelector('#second-row').children
 const thirdRowKeys = document.querySelector('#third-row').children
 
-console.log(firstRowKeys)
-
-
 
 /*----------------------------- Event Listeners -----------------------------*/
 keyboardEl.addEventListener('click', playerGuess)
 resetBtnEl.addEventListener('click', startGame)
-
 
 
 /*-------------------------------- Functions --------------------------------*/
@@ -37,6 +33,8 @@ function startGame() {
   resetBtnEl.style.display = 'none'
   messageEl.style.display = 'none'
   keyboardEl.style.display = ''
+  secretWord = getSecretWord()
+  console.log(secretWord)
   clearBoard()
   clearKeyboard()
 }
@@ -109,6 +107,7 @@ function playerGuess(evt) {
 }
 
 function checkGuess() {
+  let secretWordArray = secretWord.toUpperCase().split('')
   for(let i=0; i<5; i++) {
     if(secretWordArray.includes(guess[i])) {
       if(guess[i] === secretWordArray[i]) {

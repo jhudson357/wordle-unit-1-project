@@ -1502,3 +1502,12 @@ const words = [
 ]
 
 
+function getSecretWord() {
+  return words[Math.floor(Math.random() * words.length)]
+}
+
+getSecretWord()
+
+export {
+  getSecretWord
+}
