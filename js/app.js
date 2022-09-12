@@ -71,7 +71,7 @@ function playerGuess(evt) {
       // if(guess.length < 5) {
       // }
       // console.log(letter, 'LETTER CLICKED')
-      if(guess.length <5) {
+      if(guess.length < 5) {
         letter = evt.target.id
         numGuesses += 1
         console.log(numGuesses, 'numGuesses')
@@ -109,31 +109,36 @@ function playerGuess(evt) {
 
 function physicalKeyboardGuess(evt) {
   keyPressed = evt.key
-  if(keyPressed !== 'Enter' && keyPressed !== 'Backspace') {
-      if(guess.length <5) {
-      letter = keyPressed.toUpperCase()
-      numGuesses += 1
-      renderGuess()
-      guess.push(letter)
-      letter = ''
-    }
-  } else if (keyPressed === 'Backspace') {
-    if(guess.length !== 0) {
-      guess.pop(letter)
-      renderGuess()
-      numGuesses -= 1
-    }
-  } else {
-    if(guess.length === 5) {
-      checkGuess()
-      // squareEl[numGuesses].style.animation = 'flip'
-      guess = []
+  let charCode = evt.keyCode
+  console.log(charCode, 'charCode')
+  console.log(keyPressed, 'keyPressed')
+  if ((charCode > 64 && charCode < 91) || (charCode > 96 && charCode < 123) || charCode === 8 || charCode === 13) {
+    if(keyPressed !== 'Enter' && keyPressed !== 'Backspace') {
+        if(guess.length < 5) {
+        letter = keyPressed.toUpperCase()
+        numGuesses += 1
+        renderGuess()
+        guess.push(letter)
+        letter = ''
+      }
+    } else if (keyPressed === 'Backspace') {
+      if(guess.length !== 0) {
+        guess.pop(letter)
+        renderGuess()
+        numGuesses -= 1
+      }
     } else {
-      messageEl.style.display = ''
-      messageEl.textContent = 'Not enough letters'
-      setTimeout(function() {
-        messageEl.style.display = 'none'
-      }, 1500)
+      if(guess.length === 5) {
+        checkGuess()
+        // squareEl[numGuesses].style.animation = 'flip'
+        guess = []
+      } else {
+        messageEl.style.display = ''
+        messageEl.textContent = 'Not enough letters'
+        setTimeout(function() {
+          messageEl.style.display = 'none'
+        }, 1500)
+      }
     }
   }
 }
@@ -143,10 +148,9 @@ function checkGuess() {
   for(let i=0; i<5; i++) {
     if(secretWordArray.includes(guess[i])) {
       if(guess[i] === secretWordArray[i]) {
-        console.log(`${guess[i]} is a match!`)
+        // GREEN LETTER
         if(numGuesses === 4){
           squareEl[i].className = 'green'
-          console.log(squareEl[i], 'green green green')
           squareEl[i].style.animation = 'flip 1s ease '
           document.getElementById(`${squareEl[i].textContent}`).className = 'green'
         } else if(numGuesses === 9) {
@@ -166,7 +170,7 @@ function checkGuess() {
           document.getElementById(`${squareEl[i+25].textContent}`).className = 'green'  
         }    
       } else {
-        console.log(`${guess[i]} is in the secret word, but in a dif location`)
+        // YELLOW LETTER
         if(numGuesses === 4){
           squareEl[i].className = 'yellow'
           if(document.getElementById(`${squareEl[i].textContent}`).className !== 'green') {document.getElementById(`${squareEl[i].textContent}`).className = 'yellow'}
@@ -188,7 +192,7 @@ function checkGuess() {
         }
       }
     } else {
-      console.log(`${guess[i]} is not in the secret word`)
+      // GRAY LETTER
       if(numGuesses === 4){
         squareEl[i].className = 'gray'
         document.getElementById(`${squareEl[i].textContent}`).className = 'gray'
