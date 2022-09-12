@@ -1,20 +1,4 @@
 /*-------------------------------- Constants --------------------------------*/
-// const keys = [
-//   'Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P',
-//   'A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L',
-//   'ENTER', 'Z', 'X', 'C', 'V', 'B', 'N', 'M', 'BACK'
-// ]
-
-// const board = [
-//   ['', '', '', '', ''],
-//   ['', '', '', '', ''],
-//   ['', '', '', '', ''],
-//   ['', '', '', '', ''],
-//   ['', '', '', '', ''],
-//   ['', '', '', '', '']
-// ]
-
-
 
 /*-------------------------------- Variables --------------------------------*/
 let randomWord, row, numGuesses, winner, letter
@@ -67,10 +51,13 @@ function clearBoard() {
 function clearKeyboard() {
   for(let i=0; i<firstRowKeys.length; i++) {
     firstRowKeys[i].className = ''
+    // firstRowKeys[i].style.backgroundColor = 'rgb(212, 214, 218)'
   }
   for(let i=0; i<secondRowKeys.length; i++) {
     secondRowKeys[i].className = ''
+    // secondRowKeys[i].style.backgroundColor = 'rgb(212, 214, 218)'
     thirdRowKeys[i].className = ''
+    // thirdRowKeys[i].style.backgroundColor = 'rgb(212, 214, 218)'
   }
 }
 

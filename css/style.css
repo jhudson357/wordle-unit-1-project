@@ -22,7 +22,7 @@ body {
 }
 
 #board-square {
-  border: 1px solid black;
+  border: 1px solid rgb(211, 214, 218);
   width: 30px;
   height: 30px;
   margin: 2px;
@@ -48,10 +48,11 @@ body {
 #first-row > div,
 #second-row > div,
 #third-row > div {
+  border: 1px solid black;
   border-radius: 3px;
   margin: 2px;
   padding: 3px;
-  background-color: rgb(212, 214, 218);
+  /* background-color: rgb(212, 214, 218); */
 }
 
 #reset-btn {
