@@ -50,14 +50,14 @@ h1 {
 #second-row,
 #third-row {
   display: flex;
+  margin-bottom: 8px;
 }
 
-#first-row > div,
-#second-row > div,
-#third-row > div {
-  border: 1px solid black;
+button {
+  border: none;
+  background-color: rgb(212, 214, 218);
   border-radius: 4px;
-  margin: 2px;
+  margin-right: 6px;
   padding: 3px;
   width: 43px;
   height: 58px;
@@ -66,7 +66,6 @@ h1 {
   display: flex;
   justify-content: center;
   align-items: center;
-  /* background-color: rgb(212, 214, 218); */
 }
 
 #enter, 
@@ -76,19 +75,24 @@ h1 {
 
 #reset-btn {
   margin: 15px 0 0 0;
+  width: auto;
+  padding: 0 15px;
 }
 
 .green {
   background-color: rgb(95, 160, 89);
   color: white;
+  border: none;
 }
 
 .yellow {
   background-color: rgb(194, 171, 78);
   color: white;
+  border: none;
 }
 
 .gray {
   background-color: rgb(109, 113, 115);
   color: white;
+  border: none;
 }
