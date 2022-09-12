@@ -11,6 +11,10 @@ body {
   font-family: "Clear Sans", "Helvetica Neue", Arial, sans-serif;
 }
 
+h1 {
+  font-family: 'Roboto Slab', serif;
+}
+
 #message {
   padding: 15px 0 0 0;
 }
