@@ -16,15 +16,12 @@ const squareEl = document.querySelectorAll('#board-square')
 const firstRowKeys = document.querySelector('#first-row').children
 const secondRowKeys = document.querySelector('#second-row').children
 const thirdRowKeys = document.querySelector('#third-row').children
-const physicalKeyboardMsg = document.querySelector('#physical-keyboard-msg')
 
 
 /*----------------------------- Event Listeners -----------------------------*/
 keyboardEl.addEventListener('click', playerGuess)
 resetBtnEl.addEventListener('click', startGame)
-physicalKeyboardMsg.addEventListener('keydown', physicalKeyboardGuess)
-// physicalKeyboardMsg.addEventListener('keypress', physicalKeyboard)
-// physicalKeyboardMsg.addEventListener('keyup', physicalKeyboard)
+document.addEventListener('keydown', physicalKeyboardGuess)
 
 
 /*-------------------------------- Functions --------------------------------*/
