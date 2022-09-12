@@ -3,9 +3,8 @@ import { getSecretWord } from "../data/words.js";
 /*-------------------------------- Constants --------------------------------*/
 
 /*-------------------------------- Variables --------------------------------*/
-let randomWord, row, numGuesses, winner, letter
+let secretWord, row, numGuesses, winner, letter, keyPressed
 let guess = []
-let secretWord
 
 
 /*------------------------ Cached Element References ------------------------*/
@@ -17,11 +16,15 @@ const squareEl = document.querySelectorAll('#board-square')
 const firstRowKeys = document.querySelector('#first-row').children
 const secondRowKeys = document.querySelector('#second-row').children
 const thirdRowKeys = document.querySelector('#third-row').children
+const physicalKeyboardMsg = document.querySelector('#physical-keyboard-msg')
 
 
 /*----------------------------- Event Listeners -----------------------------*/
 keyboardEl.addEventListener('click', playerGuess)
 resetBtnEl.addEventListener('click', startGame)
+physicalKeyboardMsg.addEventListener('keydown', physicalKeyboardGuess)
+// physicalKeyboardMsg.addEventListener('keypress', physicalKeyboard)
+// physicalKeyboardMsg.addEventListener('keyup', physicalKeyboard)
 
 
 /*-------------------------------- Functions --------------------------------*/
@@ -49,13 +52,10 @@ function clearBoard() {
 function clearKeyboard() {
   for(let i=0; i<firstRowKeys.length; i++) {
     firstRowKeys[i].className = ''
-    // firstRowKeys[i].style.backgroundColor = 'rgb(212, 214, 218)'
   }
   for(let i=0; i<secondRowKeys.length; i++) {
     secondRowKeys[i].className = ''
-    // secondRowKeys[i].style.backgroundColor = 'rgb(212, 214, 218)'
     thirdRowKeys[i].className = ''
-    // thirdRowKeys[i].style.backgroundColor = 'rgb(212, 214, 218)'
   }
 }
 
@@ -68,11 +68,11 @@ function renderGuess() {
 function playerGuess(evt) {
   if(evt.target.id !== 'keyboard-container' && evt.target.id !== 'first-row' && evt.target.id !== 'second-row' && evt.target.id !== 'third-row') {
     if(evt.target.id !== 'enter' && evt.target.id !== 'back') {
-      if(guess.length < 5) {
-        letter = evt.target.id
-      }
-      console.log(letter, 'LETTER CLICKED')
+      // if(guess.length < 5) {
+      // }
+      // console.log(letter, 'LETTER CLICKED')
       if(guess.length <5) {
+        letter = evt.target.id
         numGuesses += 1
         console.log(numGuesses, 'numGuesses')
         renderGuess()
@@ -93,6 +93,7 @@ function playerGuess(evt) {
     } else {
       if(guess.length === 5) {
         checkGuess()
+        // squareEl[numGuesses].style.animation = 'flip'
         guess = []
       } else {
         messageEl.style.display = ''
@@ -106,6 +107,37 @@ function playerGuess(evt) {
   }
 }
 
+function physicalKeyboardGuess(evt) {
+  keyPressed = evt.key
+  if(keyPressed !== 'Enter' && keyPressed !== 'Backspace') {
+      if(guess.length <5) {
+      letter = keyPressed.toUpperCase()
+      numGuesses += 1
+      renderGuess()
+      guess.push(letter)
+      letter = ''
+    }
+  } else if (keyPressed === 'Backspace') {
+    if(guess.length !== 0) {
+      guess.pop(letter)
+      renderGuess()
+      numGuesses -= 1
+    }
+  } else {
+    if(guess.length === 5) {
+      checkGuess()
+      // squareEl[numGuesses].style.animation = 'flip'
+      guess = []
+    } else {
+      messageEl.style.display = ''
+      messageEl.textContent = 'Not enough letters'
+      setTimeout(function() {
+        messageEl.style.display = 'none'
+      }, 1500)
+    }
+  }
+}
+
 function checkGuess() {
   let secretWordArray = secretWord.toUpperCase().split('')
   for(let i=0; i<5; i++) {
@@ -114,6 +146,8 @@ function checkGuess() {
         console.log(`${guess[i]} is a match!`)
         if(numGuesses === 4){
           squareEl[i].className = 'green'
+          console.log(squareEl[i], 'green green green')
+          squareEl[i].style.animation = 'flip 1s ease '
           document.getElementById(`${squareEl[i].textContent}`).className = 'green'
         } else if(numGuesses === 9) {
           squareEl[i+5].className = 'green'
@@ -195,8 +229,6 @@ function isWinner() {
 
 
 //!TO DO:
-// add timer to message
 // score count
-// word list file 
 // allow keyboard to function 
-// pnly highlight one color square
+// only highlight one color square
