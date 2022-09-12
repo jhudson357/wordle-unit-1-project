@@ -97,8 +97,12 @@ function playerGuess(evt) {
         checkGuess()
         guess = []
       } else {
+        messageEl.style.display = ''
         messageEl.textContent = 'Not enough letters'
         console.log("Not enough letters")
+        setTimeout(function() {
+          messageEl.style.display = 'none'
+        }, 1500)
       }
     }
   }
@@ -178,7 +182,7 @@ function checkGuess() {
 
 function isWinner() {
   if(guess.join('') === secretWord.toUpperCase()) {
-    messageEl.textContent = 'Congrats, you win!'
+    messageEl.textContent = 'Congrats, you won!'
     messageEl.style.display = ''
     resetBtnEl.style.display = ''
     keyboardEl.style.display = 'none'
@@ -192,5 +196,8 @@ function isWinner() {
 
 
 //!TO DO:
-// update colors for squares 
 // add timer to message
+// score count
+// word list file 
+// allow keyboard to function 
+// pnly highlight one color square
