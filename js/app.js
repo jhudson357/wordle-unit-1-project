@@ -1,4 +1,4 @@
-import { getSecretWord } from "../data/words.js";
+import { getSecretWord, words } from "../data/words.js";
 
 /*-------------------------------- Constants --------------------------------*/
 
@@ -19,7 +19,7 @@ const thirdRowKeys = document.querySelector('#third-row').children
 
 
 /*----------------------------- Event Listeners -----------------------------*/
-keyboardEl.addEventListener('click', playerGuess)
+keyboardEl.addEventListener('click', virtualKeyboardGuess)
 resetBtnEl.addEventListener('click', startGame)
 document.addEventListener('keydown', physicalKeyboardGuess)
 
@@ -62,40 +62,35 @@ function renderGuess() {
   }
 }
 
-function playerGuess(evt) {
+function virtualKeyboardGuess(evt) {
   if(evt.target.id !== 'keyboard-container' && evt.target.id !== 'first-row' && evt.target.id !== 'second-row' && evt.target.id !== 'third-row') {
     if(evt.target.id !== 'enter' && evt.target.id !== 'back') {
-      // if(guess.length < 5) {
-      // }
-      // console.log(letter, 'LETTER CLICKED')
       if(guess.length < 5) {
         letter = evt.target.id
         numGuesses += 1
-        console.log(numGuesses, 'numGuesses')
+        // console.log(numGuesses, 'numGuesses')
         renderGuess()
         guess.push(letter)
-        console.log(guess, 'guess array')
+        // console.log(guess, 'guess array')
         letter = ''
       }
     } else if (evt.target.id === 'back') {
       if(guess.length !== 0) {
-        console.log('pop')
+        // console.log('pop')
         guess.pop(letter)
-        console.log(guess, 'guesss')
-        console.log(numGuesses, 'numGuessess')
+        // console.log(guess, 'guesss')
+        // console.log(numGuesses, 'numGuessess')
         renderGuess()
         numGuesses -= 1
-        console.log(guess)
+        // console.log(guess)
       }
     } else {
       if(guess.length === 5) {
-        checkGuess()
-        // squareEl[numGuesses].style.animation = 'flip'
-        guess = []
+        checkWordValidity()
       } else {
         messageEl.style.display = ''
         messageEl.textContent = 'Not enough letters'
-        console.log("Not enough letters")
+        // console.log("Not enough letters")
         setTimeout(function() {
           messageEl.style.display = 'none'
         }, 1500)
@@ -126,9 +121,7 @@ function physicalKeyboardGuess(evt) {
       }
     } else {
       if(guess.length === 5) {
-        checkGuess()
-        // squareEl[numGuesses].style.animation = 'flip'
-        guess = []
+        checkWordValidity()
       } else {
         messageEl.style.display = ''
         messageEl.textContent = 'Not enough letters'
@@ -137,6 +130,23 @@ function physicalKeyboardGuess(evt) {
         }, 1500)
       }
     }
+  }
+}
+
+function checkWordValidity() {
+  let guessedWord = guess.join('').toLowerCase()
+  console.log(guessedWord)
+  if(words.includes(guessedWord)) {
+    console.log('word is valid')
+    checkGuess()
+    guess = []
+  } else {
+    console.log('word is NOT valid')
+    messageEl.style.display = ''
+    messageEl.textContent = 'Not a valid word'
+    setTimeout(function() {
+      messageEl.style.display = 'none'
+    }, 1500)
   }
 }
 
