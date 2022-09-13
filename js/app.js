@@ -36,7 +36,7 @@ function startGame() {
   messageEl.style.display = 'none'
   keyboardEl.style.display = ''
   // secretWord = getSecretWord()
-  secretWord = 'forum'
+  secretWord = 'whits'
   console.log(secretWord)
   clearBoard()
   clearKeyboard()
@@ -133,7 +133,6 @@ function physicalKeyboardGuess(evt) {
       }
     } else {
       if(guess.length === 5) {
-        flipSquares()
         checkWordValidity()
       } else {
         messageEl.style.display = ''
@@ -151,6 +150,7 @@ function checkWordValidity() {
   console.log(guessedWord, 'guessedWord')
   if(words.includes(guessedWord)) {
     // console.log('word is valid')
+    flipSquares()
     countLetters()
     renderColors()
     row += 1
