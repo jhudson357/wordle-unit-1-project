@@ -177,9 +177,9 @@ function renderColors() {
     if(secretWordArray[i] === squareLetter) {
         squareBeingChecked.classList.add('green')
         document.getElementById(`${squareLetter.toUpperCase()}`).className = 'green'
-        console.log(secretTally, 'secretTally before subtracting 1')
+        // console.log(secretTally, 'secretTally before subtracting 1')
         secretTally[squareLetter] -= 1
-        console.log(secretTally, 'secretTally after subtracting 1')
+        // console.log(secretTally, 'secretTally after subtracting 1')
     }
   }
 
@@ -244,15 +244,18 @@ function flipSquares() {
       ms += 400
       console.log(squareBeingFlipped, 'squareBeingFlipped')
     }
-  }
+}
 
 
 function isWinner() {
   if(guess.join('') === secretWord.toUpperCase()) {
     messageEl.textContent = 'Congrats, you won!'
-    messageEl.style.display = ''
-    resetBtnEl.style.display = ''
-    keyboardEl.style.display = 'none'
+    // messageEl.style.display = ''
+    setTimeout(function() {
+      messageEl.style.display = ''
+      resetBtnEl.style.display = ''
+      keyboardEl.style.display = 'none'
+    }, 2500)
   } else if(numGuesses === 29) {
     messageEl.textContent = `You lose. The word was ${secretWord}`
     messageEl.style.display = ''

@@ -98,7 +98,8 @@ button {
 #reset-btn {
   margin: 15px 0 0 0;
   width: auto;
-  padding: 0 15px;
+  height: auto;
+  padding: 10px;
 }
 
 .green {
