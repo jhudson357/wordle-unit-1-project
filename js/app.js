@@ -177,13 +177,18 @@ function renderColors() {
       if(secretWordArray[i] === squareLetter) {
         // GREEN LETTER
         squareBeingChecked.classList.add('green')
+        document.getElementById(`${squareLetter.toUpperCase()}`).className = 'green'
       } else {
         // YELLOW LETTER
         squareBeingChecked.classList.add('yellow')
+        if(document.getElementById(`${squareLetter.toUpperCase()}`).className !== 'green') {
+          document.getElementById(`${squareLetter.toUpperCase()}`).className = 'yellow'
+        }
       }
     } else {
       // GRAY LETTER
       squareBeingChecked.classList.add('gray')
+      document.getElementById(`${squareLetter.toUpperCase()}`).className = 'gray'
     }
   }
   isWinner()
