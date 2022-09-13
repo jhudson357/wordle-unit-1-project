@@ -3,7 +3,7 @@ import { getSecretWord, words } from "../data/words.js";
 /*-------------------------------- Constants --------------------------------*/
 
 /*-------------------------------- Variables --------------------------------*/
-let secretWord, numGuesses, winner, letter, keyPressed, ms, row, col
+let secretWord, numGuesses, winner, letter, keyPressed, ms, row, col, secretTally
 let guess = []
 
 
@@ -16,9 +16,6 @@ const firstRowKeys = document.querySelector('#first-row').children
 const secondRowKeys = document.querySelector('#second-row').children
 const thirdRowKeys = document.querySelector('#third-row').children
 const squareEl = document.querySelectorAll('.board-square')
-console.log(squareEl, 'length')
-
-console.log(firstRowKeys[0].id)
 
 /*----------------------------- Event Listeners -----------------------------*/
 keyboardEl.addEventListener('click', virtualKeyboardGuess)
@@ -38,7 +35,8 @@ function startGame() {
   resetBtnEl.style.display = 'none'
   messageEl.style.display = 'none'
   keyboardEl.style.display = ''
-  secretWord = getSecretWord()
+  // secretWord = getSecretWord()
+  secretWord = 'forum'
   console.log(secretWord)
   clearBoard()
   clearKeyboard()
@@ -112,8 +110,8 @@ function virtualKeyboardGuess(evt) {
 function physicalKeyboardGuess(evt) {
   keyPressed = evt.key
   let charCode = evt.keyCode
-  console.log(charCode, 'charCode')
-  console.log(keyPressed, 'keyPressed')
+  // console.log(charCode, 'charCode')
+  // console.log(keyPressed, 'keyPressed')
   if ((charCode > 64 && charCode < 91) || (charCode > 96 && charCode < 123) || charCode === 8 || charCode === 13) {
     if(keyPressed !== 'Enter' && keyPressed !== 'Backspace') {
         if(guess.length < 5) {
@@ -149,9 +147,10 @@ function physicalKeyboardGuess(evt) {
 
 function checkWordValidity() {
   let guessedWord = guess.join('').toLowerCase()
-  console.log(guessedWord)
+  console.log(guessedWord, 'guessedWord')
   if(words.includes(guessedWord)) {
     // console.log('word is valid')
+    countLetters()
     renderColors()
     row += 1
     col = 0
@@ -168,114 +167,58 @@ function checkWordValidity() {
 }
 
 function renderColors() {
-  for(let i=0; i<5; i++) {
+  for(let i=0; i<5; i++) {  // i iterates through the columns and updates squareLetter
     let squareBeingChecked = document.getElementById(`r${row}c${i}`)
     let squareLetter = squareBeingChecked.textContent.toLowerCase()
-    console.log(squareLetter, 'squareLetterr')
     let secretWordArray = secretWord.split('')
-    if(secretWordArray.includes(squareLetter)) {
+    if(secretWordArray.includes(squareLetter)) {    // GREEN OR YELLOW LETTER
       if(secretWordArray[i] === squareLetter) {
         // GREEN LETTER
         squareBeingChecked.classList.add('green')
         document.getElementById(`${squareLetter.toUpperCase()}`).className = 'green'
+        console.log(secretTally, 'secretTally before subtracting 1')
+        secretTally[squareLetter] -= 1
+        console.log(secretTally, 'secretTally after subtracting 1')
       } else {
         // YELLOW LETTER
-        squareBeingChecked.classList.add('yellow')
-        if(document.getElementById(`${squareLetter.toUpperCase()}`).className !== 'green') {
-          document.getElementById(`${squareLetter.toUpperCase()}`).className = 'yellow'
+        console.log(secretTally[guess[i]], `secretTally[guess[${i}]]`)
+        if(secretTally[squareLetter]>0) {
+          secretTally[squareLetter] -= 1
+          squareBeingChecked.classList.add('yellow')
+          if(document.getElementById(`${squareLetter.toUpperCase()}`).className !== 'green') {
+            document.getElementById(`${squareLetter.toUpperCase()}`).className = 'yellow'
+          }
+        } else {
+          // GRAY LETTER
+          squareBeingChecked.classList.add('gray')
+          if(document.getElementById(`${squareLetter.toUpperCase()}`).className !== 'green' && document.getElementById(`${squareLetter.toUpperCase()}`).className !== 'yellow') {
+            document.getElementById(`${squareLetter.toUpperCase()}`).className = 'gray'
+          }
         }
       }
     } else {
       // GRAY LETTER
       squareBeingChecked.classList.add('gray')
-      document.getElementById(`${squareLetter.toUpperCase()}`).className = 'gray'
+      if(document.getElementById(`${squareLetter.toUpperCase()}`).className !== 'green' && document.getElementById(`${squareLetter.toUpperCase()}`).className !== 'yellow') {
+        document.getElementById(`${squareLetter.toUpperCase()}`).className = 'gray'
+      }
     }
-  }
   isWinner()
+  }
 }
 
-// function checkGuess() {
-//   let secretWordArray = secretWord.toUpperCase().split('')
-  
-//   flipTiles()
-//   for(let i=0; i<5; i++) {
-//     let squareLetter = squareEl[i].textContent
-//     console.log(squareLetter, 'square letter')
+function countLetters() {
+  // console.log(secretWord, 'secretWord in countLetters fucntion')
+  secretTally = secretWord.split('').reduce(function (prev, char) {
+    prev[char] = prev[char] ? prev[char]+1 : 1
+    return prev
+  }, {})
+  // console.log(guessTally, 'guessTally')
+  // console.log(guessTally[letter], 'guessTally[0]')
+  console.log(secretTally, 'secretTally')
+  return secretTally
+}
 
-
-//     if(secretWordArray.includes(guess[i])) {
-//       if(guess[i] === secretWordArray[i]) {
-//         // GREEN LETTER
-//         flipTiles()
-//         if(numGuesses === 4){
-//           squareEl[i].classList.add('green')
-//           console.log(squareEl[i].className)
-//           document.getElementById(`${squareEl[i].textContent}`).classList.add('green')
-//         } else if(numGuesses === 9) {
-//           squareEl[i+5].classList.add('green')
-//           document.getElementById(`${squareEl[i+5].textContent}`).className = 'green'
-//         } else if(numGuesses === 14) {
-//           squareEl[i+10].classList.add('green')
-//           document.getElementById(`${squareEl[i+10].textContent}`).className = 'green'
-//         } else if(numGuesses === 19) {
-//           squareEl[i+15].classList.add('green')
-//           document.getElementById(`${squareEl[i+15].textContent}`).className = 'green'
-//         } else if(numGuesses === 24) {
-//           squareEl[i+20].classList.add('green')
-//           document.getElementById(`${squareEl[i+20].textContent}`).className = 'green'
-//         } else if(numGuesses === 29) {
-//           squareEl[i+25].classList.add('green')
-//           document.getElementById(`${squareEl[i+25].textContent}`).className = 'green'  
-//         }    
-//       } else {
-//         // YELLOW LETTER
-//         flipTiles()
-//         if(numGuesses === 4){
-//           squareEl[i].classList.add('yellow')
-//           if(document.getElementById(`${squareEl[i].textContent}`).className !== 'green') {document.getElementById(`${squareEl[i].textContent}`).className = 'yellow'}
-//         } else if(numGuesses === 9) {
-//           squareEl[i+5].classList.add('yellow')
-//           if(document.getElementById(`${squareEl[i+5].textContent}`).className !== 'green') {document.getElementById(`${squareEl[i+5].textContent}`).className = 'yellow'}
-//         } else if(numGuesses === 14) {
-//           squareEl[i+10].classList.add('yellow')
-//           if(document.getElementById(`${squareEl[i+10].textContent}`).className !== 'green') {document.getElementById(`${squareEl[i+10].textContent}`).className = 'yellow'}
-//         } else if(numGuesses === 19) {
-//           squareEl[i+15].classList.add('yellow')
-//           if(document.getElementById(`${squareEl[i+15].textContent}`).className !== 'green') {document.getElementById(`${squareEl[i+15].textContent}`).className = 'yellow'}
-//         } else if(numGuesses === 24) {
-//           squareEl[i+20].classList.add('yellow')
-//           if(document.getElementById(`${squareEl[i+20].textContent}`).className !== 'green') {document.getElementById(`${squareEl[i+20].textContent}`).className = 'yellow'}
-//         } else if(numGuesses === 29) {
-//           squareEl[i+25].classList.add('yellow')
-//           if(document.getElementById(`${squareEl[i+25].textContent}`).className !== 'green') {document.getElementById(`${squareEl[i+25].textContent}`).className = 'yellow'}  
-//         }
-//       }
-//     } else {
-//       // GRAY LETTER
-//       flipTiles()
-//       if(numGuesses === 4) {
-//         squareEl[i].classList.add('gray')
-//         document.getElementById(`${squareEl[i].textContent}`).className = 'gray'
-//       } else if(numGuesses === 9) {
-//         squareEl[i+5].classList.add('gray')
-//         document.getElementById(`${squareEl[i+5].textContent}`).className = 'gray'
-//       } else if(numGuesses === 14) {
-//         squareEl[i+10].classList.add('gray')
-//         document.getElementById(`${squareEl[i+10].textContent}`).className = 'gray'
-//       } else if(numGuesses === 19) {
-//         squareEl[i+15].classList.add('gray')
-//         document.getElementById(`${squareEl[i+15].textContent}`).className = 'gray'
-//       } else if(numGuesses === 24) {
-//         squareEl[i+20].classList.add('gray')
-//         document.getElementById(`${squareEl[i+20].textContent}`).className = 'gray'
-//       } else if(numGuesses === 29) {
-//         squareEl[i+25].classList.add('gray')
-//         document.getElementById(`${squareEl[i+25].textContent}`).className = 'gray'  
-//       }
-//     }
-//   }
-//   isWinner()
-// }
 
 function flipTiles() {
   // squareEl[0].style.animation = 'flip 1s ease 0ms'
@@ -313,7 +256,7 @@ function isWinner() {
 // allow keyboard to function 
 // only highlight one color square
 
-
+// let countLetterInSecretWord = secretWord.match(/secretWord[i]/gi)
 
 
 // STOP UNDOING HERE
