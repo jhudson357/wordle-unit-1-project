@@ -133,6 +133,7 @@ function physicalKeyboardGuess(evt) {
       }
     } else {
       if(guess.length === 5) {
+        flipSquares()
         checkWordValidity()
       } else {
         messageEl.style.display = ''
@@ -154,7 +155,6 @@ function checkWordValidity() {
     renderColors()
     row += 1
     col = 0
-    // checkGuess()
     guess = []
   } else {
     // console.log('word is NOT valid')
@@ -171,7 +171,7 @@ function renderColors() {
     let squareBeingChecked = document.getElementById(`r${row}c${i}`)
     let squareLetter = squareBeingChecked.textContent.toLowerCase()
     let secretWordArray = secretWord.split('')
-    if(secretWordArray.includes(squareLetter)) {    // GREEN OR YELLOW LETTER
+    if(secretWordArray.includes(squareLetter)) {
       if(secretWordArray[i] === squareLetter) {
         // GREEN LETTER
         squareBeingChecked.classList.add('green')
@@ -220,20 +220,21 @@ function countLetters() {
 }
 
 
-function flipTiles() {
+function flipSquares() {
   // squareEl[0].style.animation = 'flip 1s ease 0ms'
   // squareEl[1].style.animation = 'flip 1s ease 100ms'
   // squareEl[2].style.animation = 'flip 1s ease 200ms'
   // squareEl[3].style.animation = 'flip 1s ease 300ms'
   // squareEl[4].style.animation = 'flip 1s ease 40ms'
-  if(numGuesses === 4) {
     ms = 0
     for(let i=0; i<5; i++) {
-      squareEl[i].style.animation = `flip 1s ease ${ms}ms`
-      ms += 300
+      console.log(row, 'row')
+      let squareBeingFlipped = document.getElementById(`r${row}c${i}`)
+      squareBeingFlipped.style.animation = `flip 1s ease ${ms}ms`
+      ms += 400
+      console.log(squareBeingFlipped, 'squareBeingFlipped')
     }
   }
-}
 
 
 function isWinner() {
@@ -253,10 +254,6 @@ function isWinner() {
 
 //!TO DO:
 // score count
-// allow keyboard to function 
-// only highlight one color square
-
-// let countLetterInSecretWord = secretWord.match(/secretWord[i]/gi)
-
-
-// STOP UNDOING HERE
+// flip animations
+// shake animations
+// style the message with CSS
