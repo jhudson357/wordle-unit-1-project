@@ -100,23 +100,17 @@ button {
 .green {
   background-color: rgb(95, 160, 89);
   color: white;
-  border: none;
-  width: 64px;
-  height: 64px
+  border-color: white;
 }
 
 .yellow {
   background-color: rgb(194, 171, 78);
   color: white;
-  border: none;
-  width: 64px;
-  height: 64px
+  border-color: white;
 }
 
 .gray {
   background-color: rgb(109, 113, 115);
   color: white;
-  border: none;
-  width: 64px;
-  height: 64px
+  border-color: white;
 }
