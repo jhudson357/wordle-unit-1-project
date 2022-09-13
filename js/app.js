@@ -149,15 +149,16 @@ function checkWordValidity() {
   let guessedWord = guess.join('').toLowerCase()
   console.log(guessedWord, 'guessedWord')
   if(words.includes(guessedWord)) {
-    // console.log('word is valid')
+    // WORD IS VALID
     flipSquares()
     countLetters()
+    // setTimeout(() => {renderColors()}, 1000)
     renderColors()
     row += 1
     col = 0
     guess = []
   } else {
-    // console.log('word is NOT valid')
+    // WORD IS NOT VALID
     messageEl.style.display = ''
     messageEl.textContent = 'Not in word list'
     setTimeout(function() {
@@ -166,46 +167,60 @@ function checkWordValidity() {
   }
 }
 
+
 function renderColors() {
-  for(let i=0; i<5; i++) {  // i iterates through the columns and updates squareLetter
+  // CHECK FOR GREENS FIRST
+  for(let i=0; i<5; i++) {
     let squareBeingChecked = document.getElementById(`r${row}c${i}`)
     let squareLetter = squareBeingChecked.textContent.toLowerCase()
     let secretWordArray = secretWord.split('')
-    if(secretWordArray.includes(squareLetter)) {
-      if(secretWordArray[i] === squareLetter) {
-        // GREEN LETTER
+    if(secretWordArray[i] === squareLetter) {
         squareBeingChecked.classList.add('green')
         document.getElementById(`${squareLetter.toUpperCase()}`).className = 'green'
         console.log(secretTally, 'secretTally before subtracting 1')
         secretTally[squareLetter] -= 1
         console.log(secretTally, 'secretTally after subtracting 1')
-      } else {
-        // YELLOW LETTER
-        console.log(secretTally[guess[i]], `secretTally[guess[${i}]]`)
+    }
+  }
+
+  // CHECK FOR YELLOWS AND GRAYS AFTER GREENS ARE SET
+  for(let i=0; i<5; i++) {
+    let squareBeingChecked = document.getElementById(`r${row}c${i}`)
+    let squareLetter = squareBeingChecked.textContent.toLowerCase()
+    if(!squareBeingChecked.classList.contains('green')) {
+      if(secretWord.includes(squareLetter)) {
         if(secretTally[squareLetter]>0) {
           secretTally[squareLetter] -= 1
-          squareBeingChecked.classList.add('yellow')
+          if(squareBeingChecked.className !== 'green'){
+            squareBeingChecked.classList.add('yellow')
+          }
           if(document.getElementById(`${squareLetter.toUpperCase()}`).className !== 'green') {
             document.getElementById(`${squareLetter.toUpperCase()}`).className = 'yellow'
           }
         } else {
           // GRAY LETTER
-          squareBeingChecked.classList.add('gray')
+          if(squareBeingChecked.className !== 'green'){
+            squareBeingChecked.classList.add('gray')
+          }
           if(document.getElementById(`${squareLetter.toUpperCase()}`).className !== 'green' && document.getElementById(`${squareLetter.toUpperCase()}`).className !== 'yellow') {
             document.getElementById(`${squareLetter.toUpperCase()}`).className = 'gray'
           }
         }
-      }
-    } else {
-      // GRAY LETTER
-      squareBeingChecked.classList.add('gray')
-      if(document.getElementById(`${squareLetter.toUpperCase()}`).className !== 'green' && document.getElementById(`${squareLetter.toUpperCase()}`).className !== 'yellow') {
-        document.getElementById(`${squareLetter.toUpperCase()}`).className = 'gray'
+      } else {
+        // GRAY LETTER
+        if(squareBeingChecked.className !== 'green'){
+          squareBeingChecked.classList.add('gray')
+        }
+        if(document.getElementById(`${squareLetter.toUpperCase()}`).className !== 'green' && document.getElementById(`${squareLetter.toUpperCase()}`).className !== 'yellow') {
+          document.getElementById(`${squareLetter.toUpperCase()}`).className = 'gray'
+        }
       }
     }
+  }  
   isWinner()
-  }
 }
+
+
 
 function countLetters() {
   // console.log(secretWord, 'secretWord in countLetters fucntion')
@@ -221,11 +236,6 @@ function countLetters() {
 
 
 function flipSquares() {
-  // squareEl[0].style.animation = 'flip 1s ease 0ms'
-  // squareEl[1].style.animation = 'flip 1s ease 100ms'
-  // squareEl[2].style.animation = 'flip 1s ease 200ms'
-  // squareEl[3].style.animation = 'flip 1s ease 300ms'
-  // squareEl[4].style.animation = 'flip 1s ease 40ms'
     ms = 0
     for(let i=0; i<5; i++) {
       console.log(row, 'row')
@@ -257,3 +267,44 @@ function isWinner() {
 // flip animations
 // shake animations
 // style the message with CSS
+
+// function renderColors1() {
+//   for(let i=0; i<5; i++) {  // i iterates through the columns and updates squareLetter
+//     let squareBeingChecked = document.getElementById(`r${row}c${i}`)
+//     let squareLetter = squareBeingChecked.textContent.toLowerCase()
+//     let secretWordArray = secretWord.split('')
+//     if(secretWordArray.includes(squareLetter)) {
+//       if(secretWordArray[i] === squareLetter) {
+//         // GREEN LETTER
+//         squareBeingChecked.classList.add('green')
+//         document.getElementById(`${squareLetter.toUpperCase()}`).className = 'green'
+//         console.log(secretTally, 'secretTally before subtracting 1')
+//         secretTally[squareLetter] -= 1
+//         console.log(secretTally, 'secretTally after subtracting 1')
+//       } else {
+//         // YELLOW LETTER
+//         console.log(secretTally[guess[i]], `secretTally[guess[${i}]]`)
+//         if(secretTally[squareLetter]>0) {
+//           secretTally[squareLetter] -= 1
+//           squareBeingChecked.classList.add('yellow')
+//           if(document.getElementById(`${squareLetter.toUpperCase()}`).className !== 'green') {
+//             document.getElementById(`${squareLetter.toUpperCase()}`).className = 'yellow'
+//           }
+//         } else {
+//           // GRAY LETTER
+//           squareBeingChecked.classList.add('gray')
+//           if(document.getElementById(`${squareLetter.toUpperCase()}`).className !== 'green' && document.getElementById(`${squareLetter.toUpperCase()}`).className !== 'yellow') {
+//             document.getElementById(`${squareLetter.toUpperCase()}`).className = 'gray'
+//           }
+//         }
+//       }
+//     } else {
+//       // GRAY LETTER
+//       squareBeingChecked.classList.add('gray')
+//       if(document.getElementById(`${squareLetter.toUpperCase()}`).className !== 'green' && document.getElementById(`${squareLetter.toUpperCase()}`).className !== 'yellow') {
+//         document.getElementById(`${squareLetter.toUpperCase()}`).className = 'gray'
+//       }
+//     }
+//   isWinner()
+//   }
+// }
