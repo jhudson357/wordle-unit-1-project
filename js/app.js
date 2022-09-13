@@ -3,7 +3,7 @@ import { getSecretWord, words } from "../data/words.js";
 /*-------------------------------- Constants --------------------------------*/
 
 /*-------------------------------- Variables --------------------------------*/
-let secretWord, row, numGuesses, winner, letter, keyPressed, ms
+let secretWord, numGuesses, winner, letter, keyPressed, ms, row, col
 let guess = []
 
 
@@ -33,6 +33,8 @@ startGame()
 function startGame() {
   numGuesses = -1
   ms = 0
+  row = 0
+  col = 0
   resetBtnEl.style.display = 'none'
   messageEl.style.display = 'none'
   keyboardEl.style.display = ''
@@ -62,6 +64,7 @@ function clearKeyboard() {
 function renderGuess() {
   if (guess.length < 5) {
     squareEl[numGuesses].textContent = letter
+    squareEl[numGuesses].id = `${row}=${col}`
   }
 }
 
@@ -90,6 +93,7 @@ function virtualKeyboardGuess(evt) {
     } else {
       if(guess.length === 5) {
         checkWordValidity()
+
       } else {
         messageEl.style.display = ''
         messageEl.textContent = 'Not enough letters'
@@ -113,6 +117,7 @@ function physicalKeyboardGuess(evt) {
         letter = keyPressed.toUpperCase()
         numGuesses += 1
         renderGuess()
+        col += 1
         guess.push(letter)
         letter = ''
       }
@@ -121,6 +126,7 @@ function physicalKeyboardGuess(evt) {
         guess.pop(letter)
         renderGuess()
         numGuesses -= 1
+        col -= 1
       }
     } else {
       if(guess.length === 5) {
@@ -141,6 +147,8 @@ function checkWordValidity() {
   console.log(guessedWord)
   if(words.includes(guessedWord)) {
     // console.log('word is valid')
+    row += 1
+    col = 0
     checkGuess()
     guess = []
   } else {
