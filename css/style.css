@@ -58,8 +58,8 @@ hr {
 
 .board-square {
   border: 2px solid rgb(211, 214, 218);
-  width: 62px;
-  height: 62px;
+  width: 58px;
+  height: 58px;
   font-size: 2rem;
   font-weight: bold;
   margin: 2.5px;
