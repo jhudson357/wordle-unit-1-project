@@ -87,7 +87,7 @@ hr {
   justify-content: flex-end;
   align-items: center;
   padding: 15px 0 0 0;
-
+  margin-bottom: 70px;
 }
 
 #first-row,
@@ -104,7 +104,7 @@ button {
   border-radius: 4px;
   margin-right: 6px;
   padding: 3px;
-  width: 31px;
+  width: 32px;
   height: 58px;
   font-size: 13.3333px;
   font-weight: 700;
@@ -160,5 +160,9 @@ button {
   #enter, 
   #back {
   width: 65px;
+  }
+
+  #keyboard-container {
+    margin-bottom: 0;
   }
 }
