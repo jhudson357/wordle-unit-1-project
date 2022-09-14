@@ -2,6 +2,7 @@ import { getSecretWord, words } from "../data/words.js";
 
 /*-------------------------------- Constants --------------------------------*/
 const kazoo = new Audio('../audio/kazoo-audio.wav')
+const loseSound = new Audio('../audio/loser.wav')
 
 /*-------------------------------- Variables --------------------------------*/
 let secretWord, numGuesses, letter, keyPressed, ms, row, col, secretTally
@@ -260,6 +261,7 @@ function isWinner() {
       messageEl.style.display = ''
       resetBtnEl.style.display = ''
       keyboardEl.style.display = 'none'
+      loseSound.play()
     }, 1900)
   }
 }
