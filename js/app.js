@@ -35,8 +35,8 @@ function startGame() {
   resetBtnEl.style.display = 'none'
   messageEl.style.display = 'none'
   keyboardEl.style.display = ''
-  // secretWord = getSecretWord()
-  secretWord = 'whits'
+  secretWord = getSecretWord()
+  // secretWord = 'whits'
   console.log(secretWord)
   clearBoard()
   clearKeyboard()
@@ -148,8 +148,8 @@ function checkWordValidity() {
     // WORD IS VALID
     flipSquares()
     countLetters()
-    setTimeout(function() {renderColors}, 1000)
-    // renderColors()
+    // setTimeout(function() {renderColors}, 1000)
+    renderColors()
     row += 1
     col = 0
     guess = []
@@ -236,36 +236,34 @@ function flipSquares() {
     // console.log(row, 'row')
     let squareBeingFlipped = document.getElementById(`r${row}c${i}`)
     squareBeingFlipped.style.animation = `flip 1s ease ${ms}ms`
-    ms += 400
+    ms += 200
     // console.log(squareBeingFlipped, 'squareBeingFlipped')
   }
 }
 
 
 function isWinner() {
-  setTimeout(() => {
-    if(guess.join('') === secretWord.toUpperCase()) {
+  if(guess.join('') === secretWord.toUpperCase()) {
     messageEl.textContent = 'Congrats, you won!'
-    // messageEl.style.display = ''
+    setTimeout(function() {
       messageEl.style.display = ''
       resetBtnEl.style.display = ''
       keyboardEl.style.display = 'none'
-    } else if(numGuesses === 29) {
-      messageEl.textContent = `You lose. The word was ${secretWord}`
+    }, 1900)
+
+  } else if(numGuesses === 29) {
+    messageEl.textContent = `You lose. The word was ${secretWord}`
+    setTimeout(function() {
       messageEl.style.display = ''
       resetBtnEl.style.display = ''
       keyboardEl.style.display = 'none'
-    }
-  }, 2500);
-  
-  
+    }, 1900)
+  }
 }
 
 
 //!TO DO:
-// streak count
+// score count
 // flip animations
 // shake animations
 // style the message with CSS
-
-
