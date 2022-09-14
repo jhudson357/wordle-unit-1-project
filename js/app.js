@@ -145,7 +145,6 @@ function physicalKeyboardGuess(evt) {
 
 function checkWordValidity() {
   let guessedWord = guess.join('').toLowerCase()
-  console.log(guessedWord, 'guessedWord')
   if(words.includes(guessedWord)) {
     // WORD IS VALID
     flipSquares()
@@ -167,7 +166,7 @@ function checkWordValidity() {
 
 
 function renderColors() {
-  // CHECK FOR GREENS FIRST
+  // CHECK FOR GREENS FIRST AND SET CLASS
   for(let i=0; i<5; i++) {
     let squareBeingChecked = document.getElementById(`r${row}c${i}`)
     let squareLetter = squareBeingChecked.textContent.toLowerCase()
@@ -175,9 +174,7 @@ function renderColors() {
     if(secretWordArray[i] === squareLetter) {
         squareBeingChecked.classList.add('green')
         document.getElementById(`${squareLetter.toUpperCase()}`).className = 'green'
-        // console.log(secretTally, 'secretTally before subtracting 1')
         secretTally[squareLetter] -= 1
-        // console.log(secretTally, 'secretTally after subtracting 1')
     }
   }
 
@@ -187,6 +184,7 @@ function renderColors() {
     let squareLetter = squareBeingChecked.textContent.toLowerCase()
     if(!squareBeingChecked.classList.contains('green')) {
       if(secretWord.includes(squareLetter)) {
+        // YELLOW LETTER
         if(secretTally[squareLetter]>0) {
           secretTally[squareLetter] -= 1
           if(squareBeingChecked.className !== 'green'){
@@ -220,14 +218,10 @@ function renderColors() {
 
 
 function countLetters() {
-  // console.log(secretWord, 'secretWord in countLetters fucntion')
   secretTally = secretWord.split('').reduce(function (prev, char) {
     prev[char] = prev[char] ? prev[char]+1 : 1
     return prev
   }, {})
-  // console.log(guessTally, 'guessTally')
-  // console.log(guessTally[letter], 'guessTally[0]')
-  console.log(secretTally, 'secretTally')
   return secretTally
 }
 
@@ -235,11 +229,9 @@ function countLetters() {
 function flipSquares() {
   ms = 0
   for(let i=0; i<5; i++) {
-    // console.log(row, 'row')
     let squareBeingFlipped = document.getElementById(`r${row}c${i}`)
     squareBeingFlipped.style.animation = `flip 1s ease ${ms}ms`
     ms += 200
-    // console.log(squareBeingFlipped, 'squareBeingFlipped')
   }
 }
 
@@ -254,7 +246,6 @@ function isWinner() {
       kazoo.play()
       confetti.start(2000)
     }, 1900)
-
   } else if(numGuesses === 29) {
     messageEl.textContent = `You lose. The word was ${secretWord}`
     setTimeout(function() {
@@ -270,5 +261,3 @@ function isWinner() {
 //!TO DO:
 // score count
 // flip animations
-// shake animations
-// style the message with CSS
