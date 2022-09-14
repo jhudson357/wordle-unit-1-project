@@ -1,6 +1,6 @@
 # Wordle
 
-Guess the hidden word in 6 tries. Each guess must be a valid 5 letter word. After submitting your guess (ENTER), the tiles will change to green, yellow, or gray. 
+Guess the hidden word in 6 tries. Each guess must be a valid 5-letter word. After submitting your guess (ENTER), the tiles will change to green, yellow, or gray. 
 - Green: The letter is in the correct spot
 - Yellow: The letter is in the word, but in the wrong spot
 - Gray: The letter is not in the word
