@@ -1,6 +1,7 @@
 import { getSecretWord, words } from "../data/words.js";
 
 /*-------------------------------- Constants --------------------------------*/
+const kazoo = new Audio('../audio/kazoo-audio.wav')
 
 /*-------------------------------- Variables --------------------------------*/
 let secretWord, numGuesses, letter, keyPressed, ms, row, col, secretTally
@@ -249,6 +250,7 @@ function isWinner() {
       messageEl.style.display = ''
       resetBtnEl.style.display = ''
       keyboardEl.style.display = 'none'
+      kazoo.play()
     }, 1900)
 
   } else if(numGuesses === 29) {
