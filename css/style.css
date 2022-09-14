@@ -55,9 +55,9 @@ h1 {
   }
 }
 
-.animate {
-  animation: flip 0.3s ease;
-}
+/* .animate {
+  animation: flip 400ms ease;
+} */
 
 #keyboard-container {
   display: flex;
