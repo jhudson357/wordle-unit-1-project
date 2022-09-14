@@ -251,6 +251,7 @@ function isWinner() {
       resetBtnEl.style.display = ''
       keyboardEl.style.display = 'none'
       kazoo.play()
+      confetti.start(2000)
     }, 1900)
 
   } else if(numGuesses === 29) {
