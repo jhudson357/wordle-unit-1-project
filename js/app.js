@@ -6,7 +6,7 @@ const loseSound = new Audio('../audio/loser.wav')
 
 /*-------------------------------- Variables --------------------------------*/
 let secretWord, numGuesses, letter, keyPressed, ms, row, col, secretTally
-let guess = []
+let guessLetters = []
 
 
 /*------------------------ Cached Element References ------------------------*/
@@ -65,7 +65,7 @@ function clearKeyboard() {
 
 
 function renderGuess() {
-  if (guess.length < 5) {
+  if (guessLetters.length < 5) {
     squareEl[numGuesses].textContent = letter
   }
 }
@@ -74,25 +74,25 @@ function renderGuess() {
 function virtualKeyboardGuess(evt) {
   if(evt.target.id !== 'keyboard-container' && evt.target.id !== 'first-row' && evt.target.id !== 'second-row' && evt.target.id !== 'third-row') {
     if(evt.target.id !== 'enter' && evt.target.id !== 'back') {
-      if(guess.length < 5) {
+      if(guessLetters.length < 5) {
         letter = evt.target.id
         numGuesses += 1
         renderGuess()
         squareEl[numGuesses].id = `r${row}c${col}`
         col += 1
-        guess.push(letter)
+        guessLetters.push(letter)
         letter = ''
       }
     } else if (evt.target.id === 'back') {
-      if(guess.length !== 0) {
-        guess.pop(letter)
+      if(guessLetters.length !== 0) {
+        guessLetters.pop(letter)
         renderGuess()
         squareEl[numGuesses].id = `r${row}c${col}`
         numGuesses -= 1
         col -= 1
       }
     } else {
-      if(guess.length === 5) {
+      if(guessLetters.length === 5) {
         checkWordValidity()
       } else {
         messageEl.style.display = ''
@@ -111,25 +111,25 @@ function physicalKeyboardGuess(evt) {
   let charCode = evt.keyCode
   if ((charCode > 64 && charCode < 91) || (charCode > 96 && charCode < 123) || charCode === 8 || charCode === 13) {
     if(keyPressed !== 'Enter' && keyPressed !== 'Backspace') {
-        if(guess.length < 5) {
+        if(guessLetters.length < 5) {
         letter = keyPressed.toUpperCase()
         numGuesses += 1
         renderGuess()
         squareEl[numGuesses].id = `r${row}c${col}`
         col += 1
-        guess.push(letter)
+        guessLetters.push(letter)
         letter = ''
       }
     } else if (keyPressed === 'Backspace') {
-      if(guess.length !== 0) {
-        guess.pop(letter)
+      if(guessLetters.length !== 0) {
+        guessLetters.pop(letter)
         renderGuess()
         squareEl[numGuesses].id = `r${row}c${col}`
         numGuesses -= 1
         col -= 1
       }
     } else {
-      if(guess.length === 5) {
+      if(guessLetters.length === 5) {
         checkWordValidity()
       } else {
         messageEl.style.display = ''
@@ -144,7 +144,7 @@ function physicalKeyboardGuess(evt) {
 
 
 function checkWordValidity() {
-  let guessedWord = guess.join('').toLowerCase()
+  let guessedWord = guessLetters.join('').toLowerCase()
   if(words.includes(guessedWord)) {
     // WORD IS VALID
     flipSquares()
@@ -153,7 +153,7 @@ function checkWordValidity() {
     renderColors()
     row += 1
     col = 0
-    guess = []
+    guessLetters = []
   } else {
     // WORD IS NOT VALID
     messageEl.style.display = ''
@@ -237,7 +237,7 @@ function flipSquares() {
 
 
 function isWinner() {
-  if(guess.join('') === secretWord.toUpperCase()) {
+  if(guessLetters.join('') === secretWord.toUpperCase()) {
     messageEl.textContent = 'Congrats, you won!'
     setTimeout(function() {
       messageEl.style.display = ''
