@@ -28,8 +28,27 @@
 <body>
   <header>
     <h1>Wordle</h1>
+    <button id="stats-button">Statistics</button>
   </header>
+  
   <hr>
+  <div id="stats-modal">
+    <!-- Content in modal -->
+    <div id="modal-content">
+      <span id="close-btn">×</span>
+      <h3>STATISTICS</h3>
+      <div id="stats">
+        <span class="stat-nums" id="played-num">0</span>
+        <span class="stat-nums" id="percent-num">0</span>
+        <span class="stat-nums" id="current-streak-num">0</span>
+        <span class="stat-nums" id="max-streak-num">0</span>
+        <span class="stat-titles" id="played">Played</span>
+        <span class="stat-titles" id="percent">Win %</span>
+        <span class="stat-titles" id="current-streak">Current<br>Streak</span>
+        <span class="stat-titles" id="max-streak">Max<br>Streak</span>
+      </div>
+    </div>
+  </div>
   <p id="message">Message</p>  
   <div id="board">
     <div id="board-container">

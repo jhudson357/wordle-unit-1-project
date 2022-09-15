@@ -6,6 +6,11 @@ const loseSound = new Audio('../audio/loser.wav')
 
 /*-------------------------------- Variables --------------------------------*/
 let secretWord, numGuesses, letter, keyPressed, ms, row, col, secretTally
+let gamesPlayed = 0
+let gamesWon = 0
+let winPercent = 0
+let currentStreak = 0
+let maxStreak = 0
 let guessLetters = []
 
 
@@ -18,11 +23,23 @@ const firstRowKeys = document.querySelector('#first-row').children
 const secondRowKeys = document.querySelector('#second-row').children
 const thirdRowKeys = document.querySelector('#third-row').children
 const squareEl = document.querySelectorAll('.board-square')
+const modalEl = document.querySelector('#stats-modal')
+const statsBtn = document.querySelector('#stats-button')
+const closeBtn = document.querySelector('#close-btn')
+const playedNum = document.querySelector('#played-num')
+const percentNum = document.querySelector('#percent-num')
+const currentStreakNum = document.querySelector('#current-streak-num')
+const maxStreakNum = document.querySelector('#max-streak-num')
+
+// console.log(maxStreakNum)
 
 /*----------------------------- Event Listeners -----------------------------*/
 keyboardEl.addEventListener('click', virtualKeyboardGuess)
 resetBtnEl.addEventListener('click', startGame)
 document.addEventListener('keyup', physicalKeyboardGuess)
+statsBtn.addEventListener('click', openModal)
+closeBtn.addEventListener('click', closeModal)
+
 
 
 /*-------------------------------- Functions --------------------------------*/
@@ -61,6 +78,14 @@ function clearKeyboard() {
     secondRowKeys[i].className = ''
     thirdRowKeys[i].className = ''
   }
+}
+
+function openModal() {
+  modalEl.style.display = 'block'
+}
+
+function closeModal() {
+  modalEl.style.display = 'none'
 }
 
 
@@ -165,6 +190,15 @@ function checkWordValidity() {
 }
 
 
+function countLetters() {
+  secretTally = secretWord.split('').reduce(function (prev, char) {
+    prev[char] = prev[char] ? prev[char]+1 : 1
+    return prev
+  }, {})
+  return secretTally
+}
+
+
 function renderColors() {
   // CHECK FOR GREENS FIRST AND SET CLASS
   for(let i=0; i<5; i++) {
@@ -217,15 +251,6 @@ function renderColors() {
 }
 
 
-function countLetters() {
-  secretTally = secretWord.split('').reduce(function (prev, char) {
-    prev[char] = prev[char] ? prev[char]+1 : 1
-    return prev
-  }, {})
-  return secretTally
-}
-
-
 function flipSquares() {
   ms = 0
   for(let i=0; i<5; i++) {
@@ -238,6 +263,8 @@ function flipSquares() {
 
 function isWinner() {
   if(guessLetters.join('') === secretWord.toUpperCase()) {
+    // WIN
+    renderModal()
     messageEl.textContent = 'Congrats, you won!'
     setTimeout(function() {
       messageEl.style.display = ''
@@ -247,6 +274,8 @@ function isWinner() {
       confetti.start(2000)
     }, 1900)
   } else if(numGuesses === 29) {
+    // LOSE
+    renderModal()
     messageEl.textContent = `You lose. The word was ${secretWord}`
     setTimeout(function() {
       messageEl.style.display = ''
@@ -256,6 +285,35 @@ function isWinner() {
     }, 1900)
   }
 }
+
+
+function renderModal() {
+  // GAMES PLAYED
+  gamesPlayed += 1
+  playedNum.textContent = gamesPlayed
+
+  // STREAKS
+  if(guessLetters.join('') === secretWord.toUpperCase()) {
+    // WIN
+    gamesWon += 1
+    currentStreak += 1
+    currentStreakNum.textContent = currentStreak
+
+    if(parseInt(maxStreak.textContent) === 0 || currentStreak > maxStreak) {
+      maxStreak = currentStreak
+    }
+    maxStreakNum.textContent = maxStreak
+  } else if(numGuesses === 29) {
+    // LOSE
+    currentStreak = 0
+    currentStreakNum.textContent = currentStreak
+  }
+
+  // WIN PERCENT
+  winPercent = Math.trunc((gamesWon / gamesPlayed)*100)
+  percentNum.textContent = winPercent
+}
+
 
 
 //!TO DO:
