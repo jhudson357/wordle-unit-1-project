@@ -256,10 +256,15 @@ button {
 @media only screen and (min-width: 500px) {
   header {
     height: 65px;
+    display: grid;
+    grid-template-columns: 33% auto 33%;
+    /* justify-items: center; */
   }
 
   h1 {
     font-size: 35px;
+    grid-column-start: 2;
+    text-align: center;
   }
   
   button {
