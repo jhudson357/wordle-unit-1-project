@@ -264,7 +264,6 @@ button {
     height: 65px;
     display: grid;
     grid-template-columns: 33% auto 33%;
-    /* justify-items: center; */
   }
 
   h1 {
@@ -279,7 +278,7 @@ button {
 
   #enter, 
   #back {
-  width: 65px;
+    width: 65px;
   }
 
   #keyboard-container {

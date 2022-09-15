@@ -11,7 +11,7 @@ let gamesWon = 0
 let winPercent = 0
 let currentStreak = 0
 let maxStreak = 0
-let colCount=0
+let colCount = 0
 let guessLetters = []
 
 
@@ -111,7 +111,7 @@ function virtualKeyboardGuess(evt) {
         letter = ''
       }
     } else if (evt.target.id === 'back' || evt.target.id === 'back-img') {
-      if(guessLetters.length !== 0) {
+      if (guessLetters.length !== 0) {
         guessLetters.pop(letter)
         renderGuess()
         squareEl[numGuesses].id = `r${row}c${col}`
@@ -138,7 +138,7 @@ function physicalKeyboardGuess(evt) {
   let charCode = evt.keyCode
   if ((charCode > 64 && charCode < 91) || (charCode > 96 && charCode < 123) || charCode === 8 || charCode === 13) {
     if(keyPressed !== 'Enter' && keyPressed !== 'Backspace') {
-        if(guessLetters.length < 5) {
+      if(guessLetters.length < 5) {
         letter = keyPressed.toUpperCase()
         numGuesses += 1
         renderGuess()
@@ -208,11 +208,10 @@ function addColorStyles() {
     let squareLetter = squareBeingChecked.textContent.toLowerCase()
     let secretWordArray = secretWord.split('')
     if(secretWordArray[i] === squareLetter) {
-        squareBeingChecked.classList.add('green', 'temp-color')
-        secretTally[squareLetter] -= 1
+      squareBeingChecked.classList.add('green', 'temp-color')
+      secretTally[squareLetter] -= 1
     }
   }
-
   // CHECK FOR YELLOWS AND GRAYS AFTER GREENS ARE SET
   for(let i=0; i<5; i++) {
     let squareBeingChecked = document.getElementById(`r${row}c${i}`)
@@ -288,7 +287,6 @@ function renderColors() {
         }
       }
     }
-
     colCount++
     if(colCount<5) {
       renderColors()
@@ -313,7 +311,7 @@ function isWinner() {
   } else if(numGuesses === 29) {
     // LOSE
     renderModal()
-    messageEl.textContent = `You lose. The word was ${secretWord}`
+    messageEl.textContent = `You lose. The word was ${secretWord}.`
     setTimeout(function() {
       messageEl.style.display = ''
       resetBtnEl.style.display = ''
@@ -328,14 +326,12 @@ function renderModal() {
   // GAMES PLAYED
   gamesPlayed += 1
   playedNum.textContent = gamesPlayed
-
   // STREAKS
   if(guessLetters.join('') === secretWord.toUpperCase()) {
     // WIN
     gamesWon += 1
     currentStreak += 1
     currentStreakNum.textContent = currentStreak
-
     if(parseInt(maxStreak.textContent) === 0 || currentStreak > maxStreak) {
       maxStreak = currentStreak
     }
@@ -345,7 +341,6 @@ function renderModal() {
     currentStreak = 0
     currentStreakNum.textContent = currentStreak
   }
-
   // WIN PERCENT
   winPercent = Math.trunc((gamesWon / gamesPlayed)*100)
   percentNum.textContent = winPercent
