@@ -65,6 +65,7 @@ function clearBoard() {
   for(let i=0; i<squareEl.length; i++) {
     squareEl[i].textContent = ''
     squareEl[i].className = 'board-square'
+    squareEl[i].style = ''
   }
 }
 
@@ -175,7 +176,6 @@ function checkWordValidity() {
     // WORD IS VALID
     flipSquares()
     countLetters()
-    // setTimeout(function() {renderColors}, 1000)
     renderColors()
     row += 1
     col = 0
@@ -267,11 +267,7 @@ function flipSquares() {
 function colors2() {
   setTimeout(function () {
     let squareBeingFlipped = document.getElementById(`r${row-1}c${i}`)
-    // console.log(row, 'row')
     squareBeingFlipped.classList.remove('temp-color')
-    // console.log(squareBeingFlipped.classList, 'classlist')
-    // console.log(squareBeingFlipped, 'square being flipped')
-    // console.log(i, 'i')
     i++
     if(i<5) {
       colors2()
@@ -300,7 +296,7 @@ function isWinner() {
       kazoo.volume = .10
       kazoo.play()
       confetti.start(2000)
-    }, 1900)
+    }, 2300)
   } else if(numGuesses === 29) {
     // LOSE
     renderModal()
@@ -310,7 +306,7 @@ function isWinner() {
       resetBtnEl.style.display = ''
       keyboardEl.style.display = 'none'
       loseSound.play()
-    }, 1900)
+    }, 2300)
   }
 }
 
