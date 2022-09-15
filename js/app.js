@@ -209,7 +209,6 @@ function addColorStyles() {
     let secretWordArray = secretWord.split('')
     if(secretWordArray[i] === squareLetter) {
         squareBeingChecked.classList.add('green', 'temp-color')
-        document.getElementById(`${squareLetter.toUpperCase()}`).className = 'green'
         secretTally[squareLetter] -= 1
     }
   }
@@ -226,25 +225,16 @@ function addColorStyles() {
           if(squareBeingChecked.className !== 'green'){
             squareBeingChecked.classList.add('yellow', 'temp-color')
           }
-          if(document.getElementById(`${squareLetter.toUpperCase()}`).className !== 'green') {
-            document.getElementById(`${squareLetter.toUpperCase()}`).className = 'yellow'
-          }
         } else {
           // GRAY LETTER
           if(squareBeingChecked.className !== 'green'){
             squareBeingChecked.classList.add('gray', 'temp-color')
-          }
-          if(document.getElementById(`${squareLetter.toUpperCase()}`).className !== 'green' && document.getElementById(`${squareLetter.toUpperCase()}`).className !== 'yellow') {
-            document.getElementById(`${squareLetter.toUpperCase()}`).className = 'gray'
           }
         }
       } else {
         // GRAY LETTER
         if(squareBeingChecked.className !== 'green'){
           squareBeingChecked.classList.add('gray', 'temp-color')
-        }
-        if(document.getElementById(`${squareLetter.toUpperCase()}`).className !== 'green' && document.getElementById(`${squareLetter.toUpperCase()}`).className !== 'yellow') {
-          document.getElementById(`${squareLetter.toUpperCase()}`).className = 'gray'
         }
       }
     }
@@ -268,6 +258,37 @@ function renderColors() {
   setTimeout(function () {
     let squareBeingFlipped = document.getElementById(`r${row-1}c${colCount}`)
     squareBeingFlipped.classList.remove('temp-color')
+    
+    // UPDATE KEYBOARD COLORS
+    let secretWordArray = secretWord.split('')
+    let squareLetter = squareBeingFlipped.textContent.toLowerCase()
+    
+    // GREEN KEYS
+    if(secretWordArray[colCount] === squareLetter) {
+      document.getElementById(`${squareLetter.toUpperCase()}`).className = 'green'
+    }
+    // YELLOW AND GRAY KEYS
+    if(!squareBeingFlipped.classList.contains('green')) {
+      if(secretWord.includes(squareLetter)) {
+        // YELLOW LETTER
+        if(secretTally[squareLetter]+1 >0) {
+          if(document.getElementById(`${squareLetter.toUpperCase()}`).className !== 'green') {
+            document.getElementById(`${squareLetter.toUpperCase()}`).className = 'yellow'
+          }
+        } else {
+          // GRAY LETTER
+          if(document.getElementById(`${squareLetter.toUpperCase()}`).className !== 'green' && document.getElementById(`${squareLetter.toUpperCase()}`).className !== 'yellow') {
+            document.getElementById(`${squareLetter.toUpperCase()}`).className = 'gray'
+          }
+        }  
+      } else {
+        // GRAY LETTER
+        if(document.getElementById(`${squareLetter.toUpperCase()}`).className !== 'green' && document.getElementById(`${squareLetter.toUpperCase()}`).className !== 'yellow') {
+          document.getElementById(`${squareLetter.toUpperCase()}`).className = 'gray'
+        }
+      }
+    }
+
     colCount++
     if(colCount<5) {
       renderColors()
