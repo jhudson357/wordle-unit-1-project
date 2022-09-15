@@ -11,7 +11,7 @@ let gamesWon = 0
 let winPercent = 0
 let currentStreak = 0
 let maxStreak = 0
-let i=0
+let colCount=0
 let guessLetters = []
 
 
@@ -176,11 +176,11 @@ function checkWordValidity() {
     // WORD IS VALID
     flipSquares()
     countLetters()
-    renderColors()
+    addColorStyles()
     row += 1
     col = 0
     guessLetters = []
-    i=0
+    colCount=0
   } else {
     // WORD IS NOT VALID
     messageEl.style.display = ''
@@ -201,7 +201,7 @@ function countLetters() {
 }
 
 
-function renderColors() {
+function addColorStyles() {
   // CHECK FOR GREENS FIRST AND SET CLASS
   for(let i=0; i<5; i++) {
     let squareBeingChecked = document.getElementById(`r${row}c${i}`)
@@ -250,7 +250,7 @@ function renderColors() {
     }
   }  
   isWinner()
-  colors2()
+  renderColors()
 }
 
 
@@ -264,23 +264,15 @@ function flipSquares() {
 }
 
 
-function colors2() {
+function renderColors() {
   setTimeout(function () {
-    let squareBeingFlipped = document.getElementById(`r${row-1}c${i}`)
+    let squareBeingFlipped = document.getElementById(`r${row-1}c${colCount}`)
     squareBeingFlipped.classList.remove('temp-color')
-    i++
-    if(i<5) {
-      colors2()
+    colCount++
+    if(colCount<5) {
+      renderColors()
     }
   }, 400)
-}
-
-
-function colors() {
-  for(let i=0; i<5; i++) {
-    let squareBeingFlipped = document.getElementById(`r${row}c${i}`)
-    squareBeingFlipped.classList.remove('temp-color')
-  }  
 }
 
 
@@ -296,7 +288,7 @@ function isWinner() {
       kazoo.volume = .10
       kazoo.play()
       confetti.start(2000)
-    }, 2300)
+    }, 2400)
   } else if(numGuesses === 29) {
     // LOSE
     renderModal()
@@ -306,7 +298,7 @@ function isWinner() {
       resetBtnEl.style.display = ''
       keyboardEl.style.display = 'none'
       loseSound.play()
-    }, 2300)
+    }, 2400)
   }
 }
 
