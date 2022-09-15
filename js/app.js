@@ -11,6 +11,7 @@ let gamesWon = 0
 let winPercent = 0
 let currentStreak = 0
 let maxStreak = 0
+let i=0
 let guessLetters = []
 
 
@@ -179,6 +180,7 @@ function checkWordValidity() {
     row += 1
     col = 0
     guessLetters = []
+    i=0
   } else {
     // WORD IS NOT VALID
     messageEl.style.display = ''
@@ -206,7 +208,7 @@ function renderColors() {
     let squareLetter = squareBeingChecked.textContent.toLowerCase()
     let secretWordArray = secretWord.split('')
     if(secretWordArray[i] === squareLetter) {
-        squareBeingChecked.classList.add('green')
+        squareBeingChecked.classList.add('green', 'temp-color')
         document.getElementById(`${squareLetter.toUpperCase()}`).className = 'green'
         secretTally[squareLetter] -= 1
     }
@@ -222,7 +224,7 @@ function renderColors() {
         if(secretTally[squareLetter]>0) {
           secretTally[squareLetter] -= 1
           if(squareBeingChecked.className !== 'green'){
-            squareBeingChecked.classList.add('yellow')
+            squareBeingChecked.classList.add('yellow', 'temp-color')
           }
           if(document.getElementById(`${squareLetter.toUpperCase()}`).className !== 'green') {
             document.getElementById(`${squareLetter.toUpperCase()}`).className = 'yellow'
@@ -230,7 +232,7 @@ function renderColors() {
         } else {
           // GRAY LETTER
           if(squareBeingChecked.className !== 'green'){
-            squareBeingChecked.classList.add('gray')
+            squareBeingChecked.classList.add('gray', 'temp-color')
           }
           if(document.getElementById(`${squareLetter.toUpperCase()}`).className !== 'green' && document.getElementById(`${squareLetter.toUpperCase()}`).className !== 'yellow') {
             document.getElementById(`${squareLetter.toUpperCase()}`).className = 'gray'
@@ -239,7 +241,7 @@ function renderColors() {
       } else {
         // GRAY LETTER
         if(squareBeingChecked.className !== 'green'){
-          squareBeingChecked.classList.add('gray')
+          squareBeingChecked.classList.add('gray', 'temp-color')
         }
         if(document.getElementById(`${squareLetter.toUpperCase()}`).className !== 'green' && document.getElementById(`${squareLetter.toUpperCase()}`).className !== 'yellow') {
           document.getElementById(`${squareLetter.toUpperCase()}`).className = 'gray'
@@ -248,6 +250,7 @@ function renderColors() {
     }
   }  
   isWinner()
+  colors2()
 }
 
 
@@ -256,8 +259,32 @@ function flipSquares() {
   for(let i=0; i<5; i++) {
     let squareBeingFlipped = document.getElementById(`r${row}c${i}`)
     squareBeingFlipped.style.animation = `flip 1s ease ${ms}ms`
-    ms += 200
+    ms += 400
   }
+}
+
+
+function colors2() {
+  setTimeout(function () {
+    let squareBeingFlipped = document.getElementById(`r${row-1}c${i}`)
+    // console.log(row, 'row')
+    squareBeingFlipped.classList.remove('temp-color')
+    // console.log(squareBeingFlipped.classList, 'classlist')
+    // console.log(squareBeingFlipped, 'square being flipped')
+    // console.log(i, 'i')
+    i++
+    if(i<5) {
+      colors2()
+    }
+  }, 400)
+}
+
+
+function colors() {
+  for(let i=0; i<5; i++) {
+    let squareBeingFlipped = document.getElementById(`r${row}c${i}`)
+    squareBeingFlipped.classList.remove('temp-color')
+  }  
 }
 
 
