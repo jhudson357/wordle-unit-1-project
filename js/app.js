@@ -350,9 +350,3 @@ function renderModal() {
   winPercent = Math.trunc((gamesWon / gamesPlayed)*100)
   percentNum.textContent = winPercent
 }
-
-
-
-//!TO DO:
-// score count
-// flip animations
