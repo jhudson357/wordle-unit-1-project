@@ -1,34 +1,33 @@
 # Wordle
+*Play the [Wordle] (https://james-hudson-wordle.netlify.app/) game*
 
+## Game Rules
 Guess the hidden word in 6 tries. Each guess must be a valid 5-letter word. After submitting your guess (ENTER), the tiles will change to green, yellow, or gray. 
 - Green: The letter is in the correct spot
 - Yellow: The letter is in the word, but in the wrong spot
 - Gray: The letter is not in the word
 
-## Play game: https://james-hudson-wordle.netlify.app/
-
 ## Game Images
-Empty Game Board
-![Empty Game Board](Assets/empty-game-board.png)
+### Empty Game Board
+![Empty Game Board](../unit-1-project/Assets/wordle-start.png)
 
-Ongoing Game
-![Ongoing Game](Assets/ongoing-game.png)
+### Ongoing Game
+![Ongoing Game](../unit-1-project/Assets/wordle-progress.png)
 
-Finished Game
-![Finished Game](Assets/finished-game.png)
+### Completed Game
+![Completed Game](../unit-1-project/Assets/wordle-win.png)
 
 ## Wireframe
-![Wireframe](Assets/Wordle%20wireframe@2x.png)
+![Wireframe](../unit-1-project/Assets/Wordle%20wireframe@2x.png)
 
 ## Technologies Used 
 - HTML
 - CSS
 - JavaScript
 
-## Next Steps
-1. Add a score counter
-2. Add a streak counter
-3. Add a dark mode
+## Future Goals
+1. Add a bar chart to the statistics modal that displays the win breakdown by number of guesses it took the user to guess the secret word.
+2. Add a dark mode
 
 ## Sources
 1. Word list: https://www-cs-faculty.stanford.edu/~knuth/sgb-words.txt
