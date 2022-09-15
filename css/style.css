@@ -36,6 +36,10 @@ h1 {
   margin-right: 20px;;
 }
 
+#stats-button:hover {
+  cursor: pointer;
+}
+
 #stats-modal {
   display: none;
   position: fixed;
@@ -61,6 +65,12 @@ h1 {
   align-self: flex-end;
   margin-right: 20px;
   font-size: 25px;
+  color: rgb(109, 113, 115)
+}
+
+#close-btn:hover {
+  color: black;
+  cursor: pointer;
 }
 
 h3 {
