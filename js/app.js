@@ -31,7 +31,6 @@ const percentNum = document.querySelector('#percent-num')
 const currentStreakNum = document.querySelector('#current-streak-num')
 const maxStreakNum = document.querySelector('#max-streak-num')
 
-// console.log(maxStreakNum)
 
 /*----------------------------- Event Listeners -----------------------------*/
 keyboardEl.addEventListener('click', virtualKeyboardGuess)
@@ -39,7 +38,6 @@ resetBtnEl.addEventListener('click', startGame)
 document.addEventListener('keyup', physicalKeyboardGuess)
 statsBtn.addEventListener('click', openModal)
 closeBtn.addEventListener('click', closeModal)
-
 
 
 /*-------------------------------- Functions --------------------------------*/
@@ -80,9 +78,11 @@ function clearKeyboard() {
   }
 }
 
+
 function openModal() {
   modalEl.style.display = 'block'
 }
+
 
 function closeModal() {
   modalEl.style.display = 'none'
@@ -270,6 +270,7 @@ function isWinner() {
       messageEl.style.display = ''
       resetBtnEl.style.display = ''
       keyboardEl.style.display = 'none'
+      kazoo.volume = .10
       kazoo.play()
       confetti.start(2000)
     }, 1900)
