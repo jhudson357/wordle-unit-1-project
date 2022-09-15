@@ -7,6 +7,9 @@ Guess the hidden word in 6 tries. Each guess must be a valid 5-letter word. Afte
 - Yellow: The letter is in the word, but in the wrong spot
 - Gray: The letter is not in the word
 
+## Wireframe
+![Wireframe](Assets/Wordle%20wireframe@2x.png)
+
 ## Game Images
 ### Empty Game Board
 ![Empty Game Board](Assets/wordle-start.png)
@@ -16,9 +19,6 @@ Guess the hidden word in 6 tries. Each guess must be a valid 5-letter word. Afte
 
 ### Completed Game
 ![Completed Game](Assets/wordle-win.png)
-
-## Wireframe
-![Wireframe](Assets/Wordle%20wireframe@2x.png)
 
 ## Technologies Used 
 - HTML
