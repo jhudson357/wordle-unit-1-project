@@ -98,7 +98,7 @@ function renderGuess() {
 
 function virtualKeyboardGuess(evt) {
   if(evt.target.id !== 'keyboard-container' && evt.target.id !== 'first-row' && evt.target.id !== 'second-row' && evt.target.id !== 'third-row') {
-    if(evt.target.id !== 'enter' && evt.target.id !== 'back') {
+    if(evt.target.id !== 'enter' && evt.target.id !== 'back' && evt.target.id !== 'back-img') {
       if(guessLetters.length < 5) {
         letter = evt.target.id
         numGuesses += 1
@@ -108,7 +108,7 @@ function virtualKeyboardGuess(evt) {
         guessLetters.push(letter)
         letter = ''
       }
-    } else if (evt.target.id === 'back') {
+    } else if (evt.target.id === 'back' || evt.target.id === 'back-img') {
       if(guessLetters.length !== 0) {
         guessLetters.pop(letter)
         renderGuess()
