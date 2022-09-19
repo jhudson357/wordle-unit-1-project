@@ -1,6 +1,9 @@
 # Wordle
 *Play the [Wordle](https://james-hudson-wordle.netlify.app/) game*
 
+## About
+This is my Unit 1 project created at General Assembly
+
 ## Game Rules
 Guess the hidden word in 6 tries. Each guess must be a valid 5-letter word. After submitting your guess, the tiles will change to green, yellow, or gray. 
 - Green: The letter is in the correct spot
