@@ -10,17 +10,17 @@ Guess the hidden word in 6 tries. Each guess must be a valid 5-letter word. Afte
 ## Planning Materials
 ### [Pseudocode](https://docs.google.com/document/d/1B1-6lsdafm1LRVMT_wPzDoH1kHZZG1LW2v_xrc0uLLk/edit)
 ### Wireframe
-![Wireframe](assets/Wordle%20wireframe@2x.png)
+![Wireframe](Assets/Wordle%20wireframe@2x.png)
 
 ## Game Images
 ### Empty Game Board
-![Empty Game Board](assets/wordle-start.png)
+![Empty Game Board](Assets/wordle-start.png)
 
 ### Ongoing Game
-![Ongoing Game](assets/wordle-progress.png)
+![Ongoing Game](Assets/wordle-progress.png)
 
 ### Completed Game
-![Completed Game](assets/wordle-win.png)
+![Completed Game](Assets/wordle-win.png)
 
 ## Technologies Used 
 - HTML
