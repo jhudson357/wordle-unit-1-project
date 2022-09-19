@@ -54,8 +54,6 @@ function startGame() {
   messageEl.style.display = 'none'
   keyboardEl.style.display = ''
   secretWord = getSecretWord()
-  // secretWord = 'whits'
-  console.log(secretWord)
   clearBoard()
   clearKeyboard()
 }
